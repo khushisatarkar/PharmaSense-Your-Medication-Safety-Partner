@@ -13,6 +13,7 @@ html,
 body {
   width: 100%;
   overflow-x: hidden;
+  background: #f4f6f8;
 }
 
 /* Global Styles */
@@ -54,7 +55,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 20px 80px;
-  background: #fff;
+  background: #f4f6f8;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
   width: 100%;
   top: 0;
@@ -707,4 +708,63 @@ body {
 .check-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* profile.php */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.profile-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card h3 {
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.profile-card p {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.title {
+  text-align: center;
+  /* font-size: 70px; */
+  padding-top: 20px;
+}
+
+.dashboard-container {
+  padding: 140px 80px;
+}
+
+.profile-header {
+  margin-bottom: 40px;
+}
+
+.profile-name {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-name h2 {
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.profile-name p {
+  color: #777;
+  font-size: 16px;
+}
+
+.profile-name img {
+  width: 100px;
 }

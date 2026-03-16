@@ -24,20 +24,24 @@
         <h2>Welcome Back</h2>
         <p class="login-sub">Sign in to access your health dashboard</p>
 
-        <form>
+        <form action="login.php" method="POST">
           <label>Email</label>
-          <input type="email" placeholder="example@email.com" required />
+          <input
+            name="email"
+            type="email"
+            placeholder="example@email.com"
+            required
+          />
 
           <label>Password</label>
-          <input type="password" placeholder="••••••" required />
+          <input
+            name="password"
+            type="password"
+            placeholder="••••••"
+            required
+          />
 
-          <button
-            onclick="window.location.href = 'dashboard.html'"
-            type="submit"
-            class="login-btn"
-          >
-            Sign In
-          </button>
+          <button type="submit" class="login-btn">Sign In</button>
         </form>
 
         <p class="register-text">

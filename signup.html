@@ -24,27 +24,37 @@
         <h2>Create Account</h2>
         <p class="login-sub">Register with your health profile</p>
 
-        <form>
+        <form action="signup.php" method="POST" onsubmit="prepareForm()">
           <label>Full Name</label>
-          <input type="text" placeholder="John Doe" required />
+          <input type="text" name="full_name" placeholder="John Doe" required />
 
           <label>Email</label>
-          <input type="email" placeholder="example@email.com" required />
+          <input
+            name="email"
+            type="email"
+            placeholder="example@email.com"
+            required
+          />
 
           <label>Password</label>
-          <input type="password" placeholder="••••••" required />
+          <input
+            name="password"
+            type="password"
+            placeholder="••••••"
+            required
+          />
 
           <h4 class="health-title">Health Profile (Required)</h4>
 
           <div class="health-grid">
             <div>
               <label>Age</label>
-              <input type="number" />
+              <input type="number" name="age" />
             </div>
 
             <div>
               <label>Gender</label>
-              <select>
+              <select name="gender">
                 <option>Select gender</option>
                 <option>Male</option>
                 <option>Female</option>
@@ -53,12 +63,12 @@
 
             <div>
               <label>Height (cm)</label>
-              <input type="number" />
+              <input type="number" name="height" />
             </div>
 
             <div>
               <label>Weight (kg)</label>
-              <input type="number" />
+              <input name="weight" type="number" />
             </div>
           </div>
 
@@ -99,7 +109,7 @@
               "
             />
             <button
-              type="button"
+              type="submit"
               class="add-btn"
               onclick="addItem('allergyInput', 'allergyList', 'allergies')"
             >
@@ -108,6 +118,8 @@
           </div>
           <div id="allergyList" class="added-list"></div>
 
+          <input type="hidden" name="conditions" id="conditionsField" />
+          <input type="hidden" name="allergies" id="allergiesField" />
           <button class="login-btn">Create Account</button>
         </form>
 
@@ -168,6 +180,11 @@
         list.appendChild(itemBox);
 
         input.value = "";
+      }
+
+      function prepareForm() {
+        document.getElementById("conditionsField").value = conditions.join(",");
+        document.getElementById("allergiesField").value = allergies.join(",");
       }
     </script>
   </body>

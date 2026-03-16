@@ -1,3 +1,39 @@
+<?php
+session_start();
+include "db.php";
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.html");
+    exit();
+}
+
+$id = $_SESSION['user_id'];
+
+// get user info
+$sql = "SELECT * FROM users WHERE id='$id'";
+$result = $conn->query($sql);
+
+$user = $result->fetch_assoc();
+
+$name = $user['full_name'];
+$age = $user['age'];
+$conditions = $user['conditions'];
+
+// convert conditions string to array
+if ($conditions != "") {
+    $conditionArray = explode(",", $conditions);
+    $conditionCount = count($conditionArray);
+} else {
+    $conditionCount = 0;
+}
+
+// medications not implemented yet
+$medicationCount = 0;
+
+// reports not implemented yet
+$reportCount = 0;
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,40 +52,44 @@
 
   <body>
     <header id="header">
-      <a href="#"><img src="logo.png" class="logo" /></a>
+      <a href="dashboard.php"><img src="logo.png" class="logo" /></a>
 
       <div class="dashboard-icons">
-        <i class="far fa-moon"></i>
-        <i class="far fa-user"></i>
+        <!-- <i class="far fa-moon"></i> -->
+        <a href="profile.php">
+          <i class="far fa-user"></i>
+        </a>        
         <i class="fas fa-sign-out-alt"></i>
       </div>
     </header>
 
     <section id="dashboard">
-      <h1>Welcome back, Khushi!</h1>
+      <h1>Welcome, <?php echo $name; ?></h1>      
       <p class="dashboard-sub">
         Your health dashboard and medication management
       </p>
 
       <div class="stats">
+        <!-- <div class="stat-number"><?php echo $age; ?></div>
+        <div class="stat-label">Age</div> -->
         <div class="stat-card">
           <p>Age</p>
-          <h2>22 years</h2>
+          <h2><?php echo $age; ?></h2>
         </div>
 
         <div class="stat-card">
           <p>Conditions</p>
-          <h2>2</h2>
+          <h2><?php echo $conditionCount; ?></h2>
         </div>
 
         <div class="stat-card">
           <p>Saved Medications</p>
-          <h2>0</h2>
+          <h2><?php echo $medicationCount; ?></h2>
         </div>
 
         <div class="stat-card">
           <p>Reports</p>
-          <h2>2</h2>
+          <h2><?php echo $reportCount; ?></h2>
         </div>
       </div>
 
