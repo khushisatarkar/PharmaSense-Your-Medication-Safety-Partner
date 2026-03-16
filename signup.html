@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Register | Pharmasense</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+  </head>
+
+  <body class="login-body">
+    <div class="signup-wrapper">
+      <div class="login-logo">
+        <img class="logo" src="logo.png" alt="" />
+      </div>
+
+      <div class="signup-card">
+        <h2>Create Account</h2>
+        <p class="login-sub">Register with your health profile</p>
+
+        <form>
+          <label>Full Name</label>
+          <input type="text" placeholder="John Doe" required />
+
+          <label>Email</label>
+          <input type="email" placeholder="example@email.com" required />
+
+          <label>Password</label>
+          <input type="password" placeholder="••••••" required />
+
+          <h4 class="health-title">Health Profile (Required)</h4>
+
+          <div class="health-grid">
+            <div>
+              <label>Age</label>
+              <input type="number" />
+            </div>
+
+            <div>
+              <label>Gender</label>
+              <select>
+                <option>Select gender</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Height (cm)</label>
+              <input type="number" />
+            </div>
+
+            <div>
+              <label>Weight (kg)</label>
+              <input type="number" />
+            </div>
+          </div>
+
+          <label>Medical Conditions (Optional)</label>
+          <div class="add-row">
+            <input
+              id="conditionInput"
+              type="text"
+              placeholder="e.g., Diabetes, Hypertension"
+              onkeypress="
+                if (event.key === 'Enter') {
+                  addItem('conditionInput', 'conditionList', 'conditions');
+                  event.preventDefault();
+                }
+              "
+            />
+            <button
+              type="button"
+              class="add-btn"
+              onclick="addItem('conditionInput', 'conditionList', 'conditions')"
+            >
+              Add
+            </button>
+          </div>
+          <div id="conditionList" class="added-list"></div>
+
+          <label>Allergies (Optional)</label>
+          <div class="add-row">
+            <input
+              id="allergyInput"
+              type="text"
+              placeholder="e.g., Penicillin, Peanuts"
+              onkeypress="
+                if (event.key === 'Enter') {
+                  addItem('allergyInput', 'allergyList', 'allergies');
+                  event.preventDefault();
+                }
+              "
+            />
+            <button
+              type="button"
+              class="add-btn"
+              onclick="addItem('allergyInput', 'allergyList', 'allergies')"
+            >
+              Add
+            </button>
+          </div>
+          <div id="allergyList" class="added-list"></div>
+
+          <button class="login-btn">Create Account</button>
+        </form>
+
+        <p class="register-text">
+          Already have an account? <a href="login.html">Sign In</a>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      let conditions = [];
+      let allergies = [];
+
+      function addItem(inputId, listId, type) {
+        const input = document.getElementById(inputId);
+        const value = input.value.trim();
+
+        if (value === "") return;
+
+        let listArray;
+
+        if (type === "conditions") {
+          listArray = conditions;
+        } else {
+          listArray = allergies;
+        }
+
+        // prevent duplicates
+        if (listArray.includes(value.toLowerCase())) {
+          alert("Name entered is already added.");
+          input.value = "";
+          return;
+        }
+
+        listArray.push(value.toLowerCase());
+
+        const list = document.getElementById(listId);
+
+        const itemBox = document.createElement("div");
+        itemBox.className = "added-drug";
+
+        itemBox.innerHTML = `
+      <span>${value}</span>
+      <i class="fas fa-times"></i>
+    `;
+
+        // delete item
+        itemBox.querySelector("i").onclick = function () {
+          itemBox.remove();
+
+          if (type === "conditions") {
+            conditions = conditions.filter((c) => c !== value.toLowerCase());
+          } else {
+            allergies = allergies.filter((a) => a !== value.toLowerCase());
+          }
+        };
+
+        list.appendChild(itemBox);
+
+        input.value = "";
+      }
+    </script>
+  </body>
+</html>
