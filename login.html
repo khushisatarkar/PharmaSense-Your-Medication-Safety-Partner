@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Login | Pharmasense</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+  </head>
+
+  <body class="login-body">
+    <div class="login-container">
+      <div class="login-logo">
+        <img src="logo.png" alt="" />
+      </div>
+
+      <div class="login-card">
+        <h2>Welcome Back</h2>
+        <p class="login-sub">Sign in to access your health dashboard</p>
+
+        <form>
+          <label>Email</label>
+          <input type="email" placeholder="example@email.com" required />
+
+          <label>Password</label>
+          <input type="password" placeholder="••••••" required />
+
+          <button
+            onclick="window.location.href = 'dashboard.html'"
+            type="submit"
+            class="login-btn"
+          >
+            Sign In
+          </button>
+        </form>
+
+        <p class="register-text">
+          Don't have an account? <a href="signup.html">Register</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

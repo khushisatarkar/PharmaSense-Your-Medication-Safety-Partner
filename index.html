@@ -1,12 +1,144 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
     <title>PharmaSense</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <section class="login">
-      <h2>Login Page</h2>
+    <header id="header">
+      <a href="#index.html"><img src="logo.png" class="logo" alt="" /></a>
+
+      <div>
+        <ul id="navbar">
+          <a href="login.html"><button>Get Started</button></a>
+        </ul>
+      </div>
+    </header>
+
+    <section id="hero">
+      <div class="hero-text">
+        <h1>
+          Your <span>Medication</span><br />
+          <span>Safety</span> Partner
+        </h1>
+
+        <p>
+          Analyze medications, check drug interactions, and discover safe home
+          remedies. Pharmasense provides intelligent health insights tailored to
+          your profile.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="primary-btn">Start Free Analysis</button>
+          <button class="secondary-btn">Learn More</button>
+        </div>
+
+        <div class="disclaimer">
+          <span class="line"></span>
+          <p>
+            <b>Medical Disclaimer:</b> Pharmasense provides informational
+            support only and is not a substitute for professional medical
+            advice, diagnosis, or treatment.
+          </p>
+        </div>
+      </div>
+
+      <div class="hero-img">
+        <img src="doctor.jpg" alt="" />
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="features-title">
+        <h2>Comprehensive Health Features</h2>
+        <p>Everything you need for medication safety</p>
+      </div>
+
+      <div class="features-container">
+        <div class="feature-box">
+          <div class="icon green">
+            <i class="fas fa-capsules"></i>
+          </div>
+          <h3>Ingredient Checker</h3>
+          <p>
+            Detailed analysis of active ingredients, purposes, and side effects
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="icon orange">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Drug Compatibility</h3>
+          <p>
+            Check interactions between multiple medications with severity
+            ratings
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="icon green">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <h3>Safety Analysis</h3>
+          <p>Personalized safety assessment based on your health profile</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="icon orange">
+            <i class="fas fa-home"></i>
+          </div>
+          <h3>Home Remedies</h3>
+          <p>Natural, safe remedies for common ailments and conditions</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <div class="analysis-img">
+        <img src="pills.jpg" alt="Medicine" />
+      </div>
+
+      <div class="analysis-text">
+        <h2>Intelligent Analysis, Personalized Results</h2>
+
+        <p class="analysis-desc">
+          Our AI-powered platform analyzes your unique health profile including
+          age, conditions, allergies, and current medications to provide
+          tailored safety recommendations.
+        </p>
+
+        <div class="analysis-point">
+          <i class="fas fa-check"></i>
+          <div>
+            <h4>Comprehensive Profile</h4>
+            <p>Track conditions, allergies, and medications</p>
+          </div>
+        </div>
+
+        <div class="analysis-point">
+          <i class="fas fa-check"></i>
+          <div>
+            <h4>Real-time Analysis</h4>
+            <p>Instant insights powered by advanced AI</p>
+          </div>
+        </div>
+
+        <div class="analysis-point">
+          <i class="fas fa-check"></i>
+          <div>
+            <h4>Safety First</h4>
+            <p>Color-coded warnings and clear recommendations</p>
+          </div>
+        </div>
+      </div>
     </section>
   </body>
 </html>
