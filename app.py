@@ -7,6 +7,17 @@ from itertools import combinations
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 
+import mysql.connector
+
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",  # default XAMPP
+    database="pharmasense"
+)
+
+cursor = db.cursor(dictionary=True)
+
 app = Flask(__name__)
 CORS(app)
 
@@ -130,6 +141,82 @@ def predict_api():
         print("ERROR:", str(e))
         return jsonify({"error": str(e)}), 500
 
+@app.route("/profile", methods=["GET"])
+def get_profile():
+    user_id = request.args.get("user_id")
+
+    if not user_id:
+        return jsonify({"error": "No user ID provided"}), 400
+
+    cursor.execute("""
+        SELECT age, allergies, current_meds 
+        FROM users 
+        WHERE id=%s
+    """, (user_id,))
+
+    user = cursor.fetchone()
+
+    if not user:
+        return jsonify({})
+
+    allergies = []
+    meds = []
+
+    if user["allergies"]:
+        allergies = [a.strip().lower() for a in user["allergies"].split(",")]
+
+    if user.get("current_meds"):
+        meds = [m.strip().lower() for m in user["current_meds"].split(",")]
+
+    return jsonify({
+        "age": user["age"],
+        "allergies": allergies,
+        "currentMeds": meds
+    })
+
+@app.route("/safety", methods=["POST"])
+def safety_check():
+    data = request.get_json(force=True)
+
+    medicine = data.get("medicine", "").lower()
+    age = int(data.get("age", 0))
+    allergies = data.get("allergies", [])
+    current_meds = data.get("currentMeds", [])
+
+    issues = []
+
+    if medicine not in brand_map:
+        return jsonify({
+            "medicine": medicine,
+            "result": "❌ Unknown Medicine",
+            "message": "Medicine not found in database"
+        })
+
+    generics = brand_map[medicine]
+
+    for g in generics:
+        if g in allergies:
+            issues.append(f"Allergic to {g}")
+
+    if age < 12:
+        issues.append("Not recommended for children under 12")
+
+    duplicates = check_duplicate_ingredients(current_meds + [medicine])
+    if duplicates:
+        issues.append(f"Contains duplicate ingredient: {', '.join(duplicates)}")
+
+    if issues:
+        return jsonify({
+            "medicine": medicine,
+            "result": "⚠ Not Safe",
+            "message": " | ".join(issues)
+        })
+    else:
+        return jsonify({
+            "medicine": medicine,
+            "result": "✅ Safe",
+            "message": "No major risk detected"
+        })
 
 if __name__ == "__main__":
     app.run(debug=True)

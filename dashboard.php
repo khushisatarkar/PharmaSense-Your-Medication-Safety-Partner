@@ -70,8 +70,6 @@ $reportCount = 0;
       </p>
 
       <div class="stats">
-        <!-- <div class="stat-number"><?php echo $age; ?></div>
-        <div class="stat-label">Age</div> -->
         <div class="stat-card">
           <p>Age</p>
           <h2><?php echo $age; ?></h2>
@@ -108,7 +106,7 @@ $reportCount = 0;
           <p>Check drug interactions</p>
         </div>
 
-        <div class="action-card">
+        <div class="action-card" onclick="window.location.href = 'safety.php'">
           <i class="fas fa-heartbeat green"></i>
           <h3>Safety Analysis</h3>
           <p>Personalized safety check</p>
@@ -121,6 +119,8 @@ $reportCount = 0;
         </div>
       </div>
     </section>
-
+  <script>
+    const USER_ID = <?php echo $_SESSION['user_id']; ?>;
+  </script>
   </body>
 </html>
