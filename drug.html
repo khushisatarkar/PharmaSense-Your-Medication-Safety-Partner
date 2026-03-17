@@ -38,74 +38,18 @@
 
         <div id="drugList"></div>
 
-        <button id="checkBtn" class="check-btn" disabled>
+        <button
+          id="checkBtn"
+          class="check-btn"
+          disabled
+          onclick="checkCompatibility()"
+        >
           Check Compatibility
         </button>
+        <div id="results"></div>
       </div>
     </section>
 
-    <script>
-      let medications = [];
-
-      function addDrug() {
-        const input = document.getElementById("drugInput");
-        const drugName = input.value.trim();
-
-        if (drugName === "") return;
-
-        // prevent duplicates
-        if (medications.includes(drugName.toLowerCase())) {
-          alert("Medication already added.");
-          input.value = "";
-          return;
-        }
-
-        medications.push(drugName.toLowerCase());
-
-        const drugList = document.getElementById("drugList");
-
-        const drugBox = document.createElement("div");
-        drugBox.className = "added-drug";
-
-        drugBox.innerHTML = `
-    <span>${drugName}</span>
-    <i class="fas fa-times"></i>
-  `;
-
-        // delete medication
-        drugBox.querySelector("i").onclick = function () {
-          drugBox.remove();
-          medications = medications.filter((m) => m !== drugName.toLowerCase());
-          updateButton();
-        };
-
-        drugList.appendChild(drugBox);
-
-        input.value = "";
-
-        updateButton();
-      }
-
-      function updateButton() {
-        const checkBtn = document.getElementById("checkBtn");
-
-        if (medications.length >= 2) {
-          checkBtn.disabled = false;
-          checkBtn.style.opacity = "1";
-        } else {
-          checkBtn.disabled = true;
-          checkBtn.style.opacity = "0.5";
-        }
-      }
-
-      // allow ENTER key
-      document
-        .getElementById("drugInput")
-        .addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            addDrug();
-          }
-        });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

@@ -1,0 +1,7 @@
+{
+  "crocin": ["paracetamol"],
+  "combiflam": ["ibuprofen", "paracetamol"],
+  "augmentin": ["amoxicillin", "clavulanic acid"],
+  "brufen": ["ibuprofen"],
+  "disprin": ["aspirin"]
+}

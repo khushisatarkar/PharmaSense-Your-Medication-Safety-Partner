@@ -27,10 +27,10 @@ if ($conditions != "") {
     $conditionCount = 0;
 }
 
-// medications not implemented yet
+// medications to be implemented 
 $medicationCount = 0;
 
-// reports not implemented yet
+// reports to be implemented 
 $reportCount = 0;
 ?>
 
@@ -121,5 +121,6 @@ $reportCount = 0;
         </div>
       </div>
     </section>
+
   </body>
 </html>
