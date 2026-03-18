@@ -112,7 +112,7 @@ $reportCount = 0;
           <p>Personalized safety check</p>
         </div>
 
-        <div class="action-card">
+        <div class="action-card" onclick="window.location.href = 'homeremedies.html'">
           <i class="fas fa-home orange"></i>
           <h3>Home Remedies</h3>
           <p>Natural remedy suggestions</p>
