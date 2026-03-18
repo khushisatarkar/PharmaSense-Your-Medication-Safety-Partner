@@ -94,7 +94,7 @@ $reportCount = 0;
       <h2 class="quick-title">Quick Actions</h2>
 
       <div class="actions">
-        <div class="action-card">
+        <div class="action-card"  onclick="window.location.href = 'medication_checker.php'">
           <i class="fas fa-capsules green"></i>
           <h3>Medication Checker</h3>
           <p>Analyze ingredients and effects</p>
