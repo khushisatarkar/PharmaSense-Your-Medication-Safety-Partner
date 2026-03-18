@@ -1,44 +1,52 @@
 async function searchRemedies() {
     let input = document.getElementById("searchInput").value.toLowerCase();
 
-    let url = "https://raw.https://github.com/khushisatarkar/PharmaSense-Your-Medication-Safety-Partner/blob/main/Home%20Remedies.jsongithubusercontent.com/rahulsharmagithub/home-remedies-dataset/main/remedies.json";
+    let url = "homeRemedies.json";  
 
     let resultDiv = document.getElementById("results");
+
+    if (input === "") {
+        resultDiv.innerHTML = "<p>Please enter a health issue</p>";
+        return;
+    }
+
     resultDiv.innerHTML = "Loading...";
 
     try {
         let response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("HTTP error " + response.status);
+        }
+
         let data = await response.json();
 
         resultDiv.innerHTML = "";
 
+        // ✅ FIX: Use correct key names
         let found = data.filter(item =>
-            item.disease.toLowerCase().includes(input) ||
-            item.symptoms.some(sym => sym.toLowerCase().includes(input))
+            item["Health Issue"] &&
+            item["Health Issue"].toLowerCase().includes(input)
         );
 
         if (found.length > 0) {
             found.forEach(item => {
-                item.remedies.forEach(remedy => {
-                    resultDiv.innerHTML += `
-                        <div class="card">
-                            <h3>${remedy.name}</h3>
-                            <p><b>Disease:</b> ${item.disease}</p>
-                            <p><b>Ingredients:</b> ${remedy.ingredients.join(", ")}</p>
-                            <p><b>Steps:</b> ${remedy.steps}</p>
-                        </div>
-                    `;
-                });
+                resultDiv.innerHTML += `
+                    <div class="card">
+                        <h3>${item["Health Issue"]}</h3>
+                        <p><b>Item:</b> ${item["Name of Item"] || "General"}</p>
+                        <p><b>Remedy:</b> ${item["Home Remedy"]}</p>
+                    </div>
+                `;
             });
         } else {
             resultDiv.innerHTML = "<p>No remedies found</p>";
         }
 
-    } catch (error) {
-        resultDiv.innerHTML = "<p>Error loading data</p>";
-        console.error(error);
     }
-}
-function goToRemedies() {
-    window.location.href = "homeRemedies.html";
+    catch (error) {
+        console.error("ERROR:", error);
+        alert(error);   // 👈 add this
+        resultDiv.innerHTML = "<p>Error loading data</p>";
+    }
 }
