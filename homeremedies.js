@@ -35,7 +35,7 @@ async function searchRemedies() {
                     <div class="card">
                         <h3>${item["Health Issue"]}</h3>
                         <p><b>Item:</b> ${item["Name of Item"] || "General"}</p>
-                        <p><b>Remedy:</b> ${item["Home Remedy"]}</p>
+                        <p class="desc">${item["Home Remedy"]}</p>
                     </div>
                 `;
             });

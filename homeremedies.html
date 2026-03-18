@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Home Remedies</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #f5f5f5;
-    }
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    .container {
-      width: 80%;
-      margin: auto;
-      text-align: center;
-    }
+    <title>Home Remedies | Pharmasense</title>
 
-    input {
-      padding: 10px;
-      width: 300px;
-    }
-
-    button {
-      padding: 10px 15px;
-      background: teal;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .card {
-      background: white;
-      margin: 15px;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: left;
-    }
-  </style>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
 </head>
+
 <body>
 
-<div class="container">
-  <h2>Home Remedies</h2>
 
-  <input type="text" id="searchInput" placeholder="Enter disease or symptom">
-  <button onclick="searchRemedies()">Search</button>
+<div class="sub-header">
 
-  <div id="results"></div>
+  <a href="dashboard.html" class="back">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+
+  <h2 style="margin: 0 auto;">Home Remedies</h2>
+
 </div>
+
+<section id="drug-check">
+
+  <p class="subtitle">
+    Discover natural and safe remedies for common health issues based on traditional knowledge.
+  </p>
+
+  <!-- 🔹 White Box -->
+  <div class="drug-box">
+
+    <div class="drug-input">
+      <input type="text" id="searchInput" placeholder="Enter health issue (e.g. cold)">
+      <button onclick="searchRemedies()">Search</button>
+    </div>
+
+    <div id="results"></div>
+
+  </div>
+
+</section>
 
 <script src="homeRemedies.js"></script>
 
 </body>
-</html>
