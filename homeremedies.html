@@ -1,5 +1,65 @@
 <!doctype html>
 <html lang="en">
+  <style>
+
+/* Pagination styling */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  border: none;
+  background: #1a9c8b;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  color: #555;
+}
+
+/* 🔹 Space between each result */
+#results {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;   /* 👈 THIS creates separation */
+}
+
+/* 🔹 Each recommendation = white box */
+.result-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* 🔹 Title */
+.result-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #1a9c8b;
+}
+
+/* 🔹 Text */
+.result-card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+}
+</style>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
