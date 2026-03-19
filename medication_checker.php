@@ -44,13 +44,18 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
 
                 <h3>Dosage</h3>
-                <div class="drug-input">
-                <select id="dosage">
-                    <option value="once">Only today</option>
-                    <option value="daily">Daily</option>
-                </select>
-                <input placeholder="e.g. 500 mg" type="number">
-                <h3 class='mg'>mg</h3>
+                <div class="drug-input dosage-row">
+                    <select id="dosage">
+                        <option value="once">Only today</option>
+                        <option value="daily">Daily</option>
+                    </select>
+                    <input
+                        type="number"
+                        id="dosageAmount"
+                        placeholder="Amount"
+                        min="1"
+                    />
+                    <span class="mg-label">mg</span>
                 </div>
 
                 <h3>Age</h3>
@@ -65,7 +70,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
                 <div id="allergyList"></div>
 
-                <button class="check-btn" onclick="checkMedicine()">
+                <button class="check-btn" onclick="checkSafety()">
                 Analyze Medicine
                 </button>
 

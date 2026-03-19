@@ -98,6 +98,8 @@ document.addEventListener("keypress", function (e) {
 async function checkSafety() {
   const medicine = document.getElementById("medicine").value.trim();
   const age = document.getElementById("age").value;
+  const dosage = document.getElementById("dosage").value;
+  const dosageAmount = document.getElementById("dosageAmount").value;
 
   if (!medicine || !age) {
     alert("Enter medicine and age");
@@ -115,6 +117,8 @@ async function checkSafety() {
         age,
         allergies,
         currentMeds,
+        dosage,
+        dosageAmount,
       }),
     });
 
@@ -122,6 +126,7 @@ async function checkSafety() {
     displaySafetyResult(data);
   } catch (err) {
     alert("Backend error");
+    console.log(err);
   }
 }
 
@@ -130,18 +135,20 @@ function displaySafetyResult(data) {
   container.innerHTML = "";
 
   const div = document.createElement("div");
-
   div.className = "result-card";
-
-  const isUnsafe = data.result.includes("Not");
-
+  const isUnsafe = data.result.includes("Not") || data.result.includes("❌");
   div.innerHTML = `
     <h3>${data.medicine}</h3>
-    <p style="color:${isUnsafe ? "red" : "green"}; font-weight:bold;">
+    <p class="${isUnsafe ? "unsafe" : "safe"}">
       ${data.result}
     </p>
-    <p>${data.message}</p>
-  `;
+    <p class="desc">${data.message || ""}</p>
 
+    ${
+      data.ingredients && data.ingredients.length
+        ? `<p><b>Ingredients:</b> ${data.ingredients.join(", ")}</p>`
+        : ""
+    }
+  `;
   container.appendChild(div);
 }
