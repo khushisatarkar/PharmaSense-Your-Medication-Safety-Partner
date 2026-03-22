@@ -21,7 +21,7 @@ db = mysql.connector.connect(
 med_df = pd.read_csv("updated_indian_medicine_data.csv")
 med_df['name'] = med_df['name'].str.lower()
 
-print(med_df.columns)
+# print(med_df.columns)
 
 def clean_ingredients(text):
     text = str(text).lower()

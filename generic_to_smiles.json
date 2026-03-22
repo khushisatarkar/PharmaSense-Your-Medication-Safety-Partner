@@ -2,6 +2,70 @@
   "paracetamol": "CC(=O)NC1=CC=C(O)C=C1",
   "ibuprofen": "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O",
   "aspirin": "CC(=O)OC1=CC=CC=C1C(=O)O",
+  "mefenamic acid": "CC1=CC=CC=C1NC2=CC=CC=C2C(=O)O",
+  "drotaverine": "COC1=CC=CC=C1C2=NC=CC(=N2)N",
+  "dicycloverine": "CCN(CC)CCOC(=O)C1=CC=CC=C1",
+
   "amoxicillin": "CC1(C)SCC(N1C(=O)N)C(=O)O",
-  "clavulanic acid": "CC1(C)C(=O)N2C(S1)C(C2=O)O"
+  "clavulanic acid": "CC1(C)C(=O)N2C(S1)C(C2=O)O",
+  "azithromycin": "CC[C@H]1C[C@@H]2[C@H](O1)O[C@H](C[C@@H]2O)N(C)C",
+  "cefixime": "CC1=NN=C(S1)SCC2=C(N3C=NC(=O)N(C3=O)C)C(=O)O",
+  "cefuroxime": "CC1=NN=C(S1)SCC2=C(N3C=NC(=O)N(C3=O)C)C(=O)O",
+  "ceftriaxone": "CC1=NN=C(S1)SCC2=C(N3C=NC(=O)N(C3=O)C)C(=O)O",
+
+  "diphenhydramine": "CN(C)CCOC(C1=CC=CC=C1)C2=CC=CC=C2",
+  "ambroxol": "C1=CC(=CC=C1CCN)Br",
+  "guaifenesin": "COC1=CC=CC=C1OCC(O)CO",
+  "dextromethorphan": "CN1CCC23C4C1CC(C2)C(C3)O4",
+  "chlorpheniramine": "CC(C)NCC(C1=CC=CC=C1)Cl",
+  "codeine": "CN1CCC23C4C1CC(C2)C(C3)OC4",
+  "promethazine": "CCN(CC)CC1=CC2=CC=CC=C2SC1",
+
+  "cetirizine": "C1=CC=C(C=C1)C(CN2CCC(CC2)O)O",
+  "fexofenadine": "CC(C)(C)NCC(O)COC1=CC=CC=C1",
+  "pheniramine": "CC(C)NCC(C1=CC=CC=C1)O",
+
+  "phenylephrine": "C1=CC(C(CN)O)=CC=C1",
+  "caffeine": "CN1C=NC2=C1C(=O)N(C(=O)N2C)C",
+
+  "sumatriptan": "CN(C)CCC1=CNC2=CC=CC=C12",
+  "naproxen": "COC1=CC=CC2=C1C=CC=C2C(C)C(=O)O",
+  "domperidone": "CC1=NC2=CC=CC=C2N1CCN3CCC(CC3)O",
+
+  "pantoprazole": "COC1=CC2=C(N1)N=C(N=C2OCC3=CC=CC=C3)S(=O)C",
+  "omeprazole": "COC1=CC2=C(N1)N=C(N=C2OCC3=CC=CC=C3)S(=O)C",
+
+  "aluminium hydroxide": "[Al+3].[OH-].[OH-].[OH-]",
+  "magnesium hydroxide": "[Mg+2].[OH-].[OH-]",
+  "simethicone": "C[Si](C)(C)O[Si](C)(C)C",
+
+  "ranitidine": "CC(C)NCC(O)COC1=NC=NC2=C1C=CN2",
+
+  "metronidazole": "CC1=NC=C(N1CCO)[N+](=O)[O-]",
+
+  "aceclofenac": "CC(=O)OC1=CC=CC=C1NC2=CC=CC=C2Cl",
+  "diclofenac": "CC1=CC=C(C=C1)NC2=CC=CC=C2Cl",
+
+  "levothyroxine": "C1=CC(=C(C=C1I)O)C(C(=O)O)N",
+
+  "metformin": "CNC(=N)NC(=N)N",
+  "glimepiride": "CC1=CC=CC=C1S(=O)(=O)N2C(=O)N(CC2)C3=CC=CC=C3",
+  "sitagliptin": "C1=CC=C(C=C1)C2=NC=NC(=N2)N",
+
+  "atorvastatin": "CC(C)C1=C(C(=O)N(C1=O)C2=CC=CC=C2)N3CCCCC3",
+
+  "telmisartan": "CC1=C(C2=CC=CC=C2N1)N3CCCCC3",
+  "losartan": "CC1=CC=C(C=C1)COC2=NC=NC3=CC=CC=C23",
+  "amlodipine": "CCOC(=O)C1=C(C)NC(C)=C(C1C(=O)OCC)C",
+  "atenolol": "CC(C)NCC(O)COC1=CC=C(C=C1)C(C)C",
+
+  "alprazolam": "CC1=NN=C2C(=N1)C=CC=C2Cl",
+
+  "vitamin e": "CC(C)CCC1=C(C(=C(C=C1)O)C)C",
+  "vitamin b complex": "C1=CC=C(C=C1)N",
+
+  "dydrogesterone": "CC12CCC3C(C1CCC2=O)CCC4=CC=CC=C34",
+  "ethinyl estradiol": "C#CC1=CC2CCC3C(C2CCC1O)CCC4=CC=CC=C34",
+  "cyproterone acetate": "CC(=O)OC1CCC2C3CCC4=CC=CC=C4C3CCC12",
+  "norethisterone": "C#CC1=CC2CCC3C(C2CCC1O)CCC4=CC=CC=C34"
 }

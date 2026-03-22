@@ -1,7 +1,75 @@
 {
   "crocin": ["paracetamol"],
-  "combiflam": ["ibuprofen", "paracetamol"],
-  "augmentin": ["amoxicillin", "clavulanic acid"],
+  "calpol": ["paracetamol"],
+  "dolo": ["paracetamol"],
   "brufen": ["ibuprofen"],
-  "disprin": ["aspirin"]
+  "combiflam": ["ibuprofen", "paracetamol"],
+  "meftal": ["mefenamic acid"],
+  "drotin": ["drotaverine"],
+  "cyclopam": ["dicycloverine", "paracetamol"],
+
+  "disprin": ["aspirin"],
+  "ecosprin": ["aspirin"],
+
+  "augmentin": ["amoxicillin", "clavulanic acid"],
+  "amoxil": ["amoxicillin"],
+  "azee": ["azithromycin"],
+  "azithral": ["azithromycin"],
+  "zifi": ["cefixime"],
+  "ceftum": ["cefuroxime"],
+  "monocef": ["ceftriaxone"],
+
+  "benadryl": ["diphenhydramine"],
+  "ascorel": ["ambroxol", "guaifenesin"],
+  "corex": ["dextromethorphan", "chlorpheniramine"],
+  "phensedyl": ["codeine", "promethazine"],
+
+  "cetzine": ["cetirizine"],
+  "allegra": ["fexofenadine"],
+  "avil": ["pheniramine"],
+
+  "sinarest": ["paracetamol", "chlorpheniramine", "phenylephrine"],
+  "vicks action 500": ["paracetamol", "caffeine", "phenylephrine"],
+
+  "suminat": ["sumatriptan"],
+  "naxdom": ["naproxen", "domperidone"],
+
+  "pan": ["pantoprazole"],
+  "pantocid": ["pantoprazole"],
+  "omez": ["omeprazole"],
+  "gelusil": ["aluminium hydroxide", "magnesium hydroxide"],
+  "digene": ["aluminium hydroxide", "magnesium hydroxide", "simethicone"],
+
+  "rantac": ["ranitidine"],
+
+  "metrogyl": ["metronidazole"],
+  "flagyl": ["metronidazole"],
+
+  "zerodol": ["aceclofenac"],
+  "voveran": ["diclofenac"],
+
+  "thyronorm": ["levothyroxine"],
+
+  "glycomet": ["metformin"],
+  "glucophage": ["metformin"],
+  "amaryl": ["glimepiride"],
+  "janumet": ["metformin", "sitagliptin"],
+
+  "atorva": ["atorvastatin"],
+  "lipitor": ["atorvastatin"],
+
+  "telma": ["telmisartan"],
+  "losar": ["losartan"],
+  "amlong": ["amlodipine"],
+  "aten": ["atenolol"],
+
+  "alprax": ["alprazolam"],
+
+  "evion": ["vitamin e"],
+  "becosules": ["vitamin b complex"],
+
+  "duphaston": ["dydrogesterone"],
+  "krimson": ["ethinyl estradiol", "cyproterone acetate"],
+
+  "primolut n": ["norethisterone"]
 }
