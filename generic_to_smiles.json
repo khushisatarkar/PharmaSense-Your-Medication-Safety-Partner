@@ -6,6 +6,11 @@
   "drotaverine": "COC1=CC=CC=C1C2=NC=CC(=N2)N",
   "dicycloverine": "CCN(CC)CCOC(=O)C1=CC=CC=C1",
 
+  "warfarin": "CC(=O)CC(C1=CC=CC=C1)C2=C(O)C3=CC=CC=C3OC2=O",
+  "clopidogrel": "COC(=O)[C@H](C1=CC=CC=C1Cl)N2C=C(C=N2)C3=CC=CS3",
+  "methotrexate": "CN(C)C1=NC(=NC2=C1N=CN2C3C(C(C(O3)CO)O)O)NC4=CC=C(C=C4)C(=O)NCC(=O)O",
+  "prednisone": "CC(=O)C1=CC(=O)C2(C(C1)CCC3C2CCC4=CC(=O)C=CC34C)C",
+
   "amoxicillin": "CC1(C)SCC(N1C(=O)N)C(=O)O",
   "clavulanic acid": "CC1(C)C(=O)N2C(S1)C(C2=O)O",
   "azithromycin": "CC[C@H]1C[C@@H]2[C@H](O1)O[C@H](C[C@@H]2O)N(C)C",

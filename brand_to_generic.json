@@ -8,8 +8,14 @@
   "drotin": ["drotaverine"],
   "cyclopam": ["dicycloverine", "paracetamol"],
 
-  "disprin": ["aspirin"],
   "ecosprin": ["aspirin"],
+  "warf": ["warfarin"],
+  "clopitab": ["clopidogrel"],
+  "methotrex": ["methotrexate"],
+  "atorlip": ["atorvastatin"],
+  "omnacortil": ["prednisone"],
+
+  "disprin": ["aspirin"],
 
   "augmentin": ["amoxicillin", "clavulanic acid"],
   "amoxil": ["amoxicillin"],
@@ -24,6 +30,8 @@
   "corex": ["dextromethorphan", "chlorpheniramine"],
   "phensedyl": ["codeine", "promethazine"],
 
+  "zyrtec": ["cetirizine"],
+  "okacet": ["cetirizine"],
   "cetzine": ["cetirizine"],
   "allegra": ["fexofenadine"],
   "avil": ["pheniramine"],
@@ -36,6 +44,7 @@
 
   "pan": ["pantoprazole"],
   "pantocid": ["pantoprazole"],
+  "pan d": ["Pantoprazole", "Domperidone"],
   "omez": ["omeprazole"],
   "gelusil": ["aluminium hydroxide", "magnesium hydroxide"],
   "digene": ["aluminium hydroxide", "magnesium hydroxide", "simethicone"],
