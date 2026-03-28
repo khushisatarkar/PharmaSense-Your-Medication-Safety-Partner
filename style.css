@@ -675,7 +675,9 @@ body {
   border: 1px solid #ddd;
 }
 
-.drug-input button {
+.drug-input button,
+.savechanges button,
+.add-row button {
   background: #1a9c8b;
   color: white;
   border: none;
@@ -756,6 +758,31 @@ body {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 }
 
+.edit-btn {
+  background: #d9a299;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.profile-card input {
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+}
+
+.profile-card input:enabled {
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .profile-card h3 {
   color: #777;
   margin-bottom: 10px;
@@ -800,80 +827,34 @@ body {
   width: 100px;
 }
 
-/* medication_checker */
-
-.drug-input select {
-  flex: 1;
-  padding: 14px;
-  border-radius: 8px;
+.edit-mode {
+  width: 100%;
+  padding: 8px;
+  font-size: 18px;
   border: 1px solid #ddd;
-  background: white;
-  font-size: 14px;
+  border-radius: 6px;
+  text-align: center;
 }
 
-.mg-label {
-  font-weight: 500;
-  color: #555;
-  align-self: center;
+.view-mode {
+  font-size: 22px;
+  font-weight: 600;
 }
 
-.result-card p {
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
-.result-card p b {
-  display: inline-block;
-  margin-bottom: 3px;
-}
-
-.dosage-row {
+.name-row {
+  display: flex;
   align-items: center;
+  gap: 10px;
 }
 
-.dosage-row label {
-  font-weight: 500;
-  min-width: 80px;
+.edit-icon {
+  font-size: 16px;
+  color: #888;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.dosage-row select {
-  flex: 1;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-.result-card {
-  border-left: 6px solid #1a9c8b;
-}
-
-.result-card .unsafe {
-  color: #e63946;
-  font-weight: 600;
-}
-
-.result-card .safe {
-  color: #2a9d8f;
-  font-weight: 600;
-}
-
-.result-card .desc {
-  margin-top: 8px;
-  color: #555;
-}
-
-@media (max-width: 600px) {
-  /* medication checker */
-
-  .drug-box {
-    padding: 20px;
-  }
-
-  .sub-header {
-    padding: 20px;
-  }
-
-  #med-check h1 {
-    font-size: 28px;
-  }
+.edit-icon:hover {
+  color: #1a9c8b;
+  transform: scale(1.1);
 }

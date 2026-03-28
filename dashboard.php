@@ -18,17 +18,19 @@ $user = $result->fetch_assoc();
 $name = $user['full_name'];
 $age = $user['age'];
 $conditions = $user['conditions'];
+$allergies = $user['allergies'];
 
-// convert conditions string to array
-if ($conditions != "") {
-    $conditionArray = explode(",", $conditions);
+$conditionCount = 0;
+if (!empty($conditions)) {
+    $conditionArray = array_filter(explode(",", $conditions));
     $conditionCount = count($conditionArray);
-} else {
-    $conditionCount = 0;
 }
 
-// medications to be implemented 
-$medicationCount = 0;
+$allergiesCount = 0;
+if (!empty($allergies)) {
+    $allergiesArray = array_filter(explode(",", $allergies));
+    $allergiesCount = count($allergiesArray);
+}
 
 // reports to be implemented 
 $reportCount = 0;
@@ -55,7 +57,6 @@ $reportCount = 0;
       <a href="dashboard.php"><img src="logo.png" class="logo" /></a>
 
       <div class="dashboard-icons">
-        <!-- <i class="far fa-moon"></i> -->
         <a href="profile.php">
           <i class="far fa-user"></i>
         </a>        
@@ -70,22 +71,22 @@ $reportCount = 0;
       </p>
 
       <div class="stats">
-        <div class="stat-card">
+        <div class="stat-card" onclick="window.location.href = 'profile.php'">
           <p>Age</p>
           <h2><?php echo $age; ?></h2>
         </div>
 
-        <div class="stat-card">
+        <div class="stat-card" onclick="window.location.href = 'profile.php'">
           <p>Conditions</p>
           <h2><?php echo $conditionCount; ?></h2>
         </div>
 
-        <div class="stat-card">
-          <p>Saved Medications</p>
-          <h2><?php echo $medicationCount; ?></h2>
+        <div class="stat-card" onclick="window.location.href = 'profile.php'">
+          <p>Allergies</p>
+          <h2><?php echo $allergiesCount; ?></h2>
         </div>
 
-        <div class="stat-card">
+        <div class="stat-card" onclick="window.location.href = 'profile.php'">
           <p>Reports</p>
           <h2><?php echo $reportCount; ?></h2>
         </div>
@@ -94,11 +95,11 @@ $reportCount = 0;
       <h2 class="quick-title">Quick Actions</h2>
 
       <div class="actions">
-        <div class="action-card"  onclick="window.location.href = 'medication_checker.php'">
+        <!-- <div class="action-card"  onclick="window.location.href = 'medication_checker.php'">
           <i class="fas fa-capsules green"></i>
           <h3>Medication Checker</h3>
           <p>Analyze ingredients and effects</p>
-        </div>
+        </div> -->
 
         <div class="action-card" onclick="window.location.href = 'drug.html'">
           <i class="fas fa-shield-alt orange"></i>
