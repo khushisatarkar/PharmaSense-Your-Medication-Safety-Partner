@@ -138,20 +138,36 @@ while($row = $historyResult->fetch_assoc()) {
         </div>
       </div>
 
-      <h2 class="quick-title">Your Recent Activities</h2>
-
+      <h2 class="quick-title history">Your Recent Activities</h2>
       <div class="history">
           <?php if(!empty($history)) {
               foreach($history as $h) { 
                   $typeIcon = $h['type'] == 'drug' ? 'fas fa-shield-alt orange' : ($h['type'] == 'safety' ? 'fas fa-heartbeat green' : 'fas fa-home orange');
                   $typeName = ucfirst($h['type']);
                   $resultText = htmlspecialchars($h['result']); // display safe
+                  $input = json_decode($h['input_data'], true);
+
+                  $label = "";
+                  if ($h['type'] == 'safety' && isset($input['medicine'])) {
+                      $label = ucfirst($input['medicine']);
+                  }
+                  else if ($h['type'] == 'drug' && is_array($input)) {
+                      $label = implode(", ", $input);
+                  }
+                  else {
+                      $label = "N/A";
+                  }
           ?>
               <div class="history-card">
                   <i class="<?php echo $typeIcon; ?>"></i>
                   <div class="history-info">
                       <h3><?php echo $typeName; ?></h3>
-                      <p><?php echo $resultText; ?></p>
+                      <p style="display:flex; justify-content:space-between; align-items:center;">
+                          <span><b><?php echo htmlspecialchars($label); ?></b></span>
+                          <span style="color: <?php echo (strpos($h['result'], 'Safe') !== false && strpos($h['result'], 'Not') === false) ? 'green' : 'red'; ?>">
+                              <?php echo htmlspecialchars($h['result']); ?>
+                          </span>
+                      </p>
                       <small><?php echo date('d M Y, H:i', strtotime($h['created_at'])); ?></small>
                   </div>
               </div>

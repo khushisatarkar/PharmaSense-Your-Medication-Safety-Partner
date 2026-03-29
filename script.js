@@ -91,8 +91,32 @@ async function checkCompatibility() {
       };
 
       displayResults([warningResult]);
+
+      await fetch("save_history.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "drug",
+          input: medications,
+          result: warningResult.result,
+        }),
+      });
     } else if (data.type === "prediction") {
       displayResults(data.results);
+
+      await fetch("save_history.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "drug",
+          input: medications,
+          result: data.results.map((r) => r.result).join(", "),
+        }),
+      });
     } else {
       alert("Unexpected response format");
     }

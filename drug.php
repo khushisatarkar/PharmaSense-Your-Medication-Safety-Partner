@@ -3,25 +3,25 @@ session_start();
 include "db.php";
 
 // Only proceed if form is submitted
-if(isset($_POST['submit'])) {
-    $user_id = $_SESSION['user_id'];
-    $type = 'drug';
-    $input_data = json_encode($_POST);
+// if(isset($_POST['submit'])) {
+//     $user_id = $_SESSION['user_id'];
+//     $type = 'drug';
+//     $input_data = json_encode($_POST);
 
-    // Compute $analysis_result here
-    // Example placeholder: replace with your actual analysis function
-    if(isset($_POST['medications']) && count($_POST['medications']) >= 2) {
-        $analysis_result = "Sample result for " . implode(", ", $_POST['medications']);
-    }
+//     // Compute $analysis_result here
+//     // Example placeholder: replace with your actual analysis function
+//     if(isset($_POST['medications']) && count($_POST['medications']) >= 2) {
+//         $analysis_result = "Sample result for " . implode(", ", $_POST['medications']);
+//     }
 
-    // Save to DB only if result exists
-    if(isset($analysis_result) && !empty($analysis_result)) {
-        $result = json_encode($analysis_result);
-        $sql = "INSERT INTO user_history (user_id, type, input_data, result) 
-                VALUES ('$user_id', '$type', '$input_data', '$result')";
-        $conn->query($sql);
-    }
-}
+//     // Save to DB only if result exists
+//     if(isset($analysis_result) && !empty($analysis_result)) {
+//         $result = json_encode($analysis_result);
+//         $sql = "INSERT INTO user_history (user_id, type, input_data, result) 
+//                 VALUES ('$user_id', '$type', '$input_data', '$result')";
+//         $conn->query($sql);
+//     }
+// }
 ?>
 
 <!doctype html>

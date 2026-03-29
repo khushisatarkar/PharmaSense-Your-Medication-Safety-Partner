@@ -575,6 +575,10 @@ body {
   margin-bottom: 25px;
 }
 
+.history {
+  margin-top: 20px;
+}
+
 .actions {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -894,4 +898,8 @@ body {
 .edit-icon:hover {
   color: #1a9c8b;
   transform: scale(1.1);
+}
+
+.pagination {
+  text-align: center;
 }

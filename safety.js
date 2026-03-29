@@ -125,6 +125,24 @@ async function checkSafety() {
 
     const data = await res.json();
     displaySafetyResult(data);
+
+    await fetch("save_history.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "safety",
+        input: {
+          medicine,
+          age,
+          dosageAmount,
+          allergies,
+          currentMeds,
+        },
+        result: data.result,
+      }),
+    });
   } catch (err) {
     alert("Backend error");
     console.log(err);

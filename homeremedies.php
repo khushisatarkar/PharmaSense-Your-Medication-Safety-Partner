@@ -29,13 +29,7 @@ if(isset($_POST['submit'])) {
   <title>Home Remedies | Pharmasense</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-  <style>
-    /* Styles for results/cards same as before */
-    #results { margin-top: 20px; display:flex; flex-direction:column; gap:20px; }
-    .result-card { background:#fff; padding:20px; border-radius:12px; border:1px solid #e6e6e6; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
-    .result-card h3 { font-size:18px; margin-bottom:8px; color:#1a9c8b; }
-    .result-card p { font-size:14px; color:#555; line-height:1.6; }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="sub-header">
@@ -52,7 +46,7 @@ if(isset($_POST['submit'])) {
       <div class="drug-input">
         <input type="text" id="searchInput" placeholder="Enter health issue (e.g. cold, headache)" />
       </div>
-      <button class="check-btn" onclick="searchRemedies()">Find Remedies</button>
+      <button class="check-btn primary-btn" onclick="searchRemedies()">Find Remedies</button>
       <div id="results"></div>
     </div>
   </section>
