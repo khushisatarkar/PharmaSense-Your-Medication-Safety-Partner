@@ -33,7 +33,25 @@ if (!empty($allergies)) {
 }
 
 // reports to be implemented 
-$reportCount = 0;
+// $reportCount = 0;
+
+// total saved reports count for dashboard stat cards
+$sqlReports = "SELECT COUNT(*) as total FROM user_history WHERE user_id='$id'";
+$resultReports = $conn->query($sqlReports);
+$reportCount = $resultReports->fetch_assoc()['total'];
+
+$sqlHistory = "SELECT * FROM user_history 
+               WHERE user_id='$id' 
+               ORDER BY created_at DESC 
+               LIMIT 10";
+
+$historyResult = $conn->query($sqlHistory);
+
+$history = [];
+while($row = $historyResult->fetch_assoc()) {
+    $history[] = $row;
+}
+
 ?>
 
 <!doctype html>
@@ -101,7 +119,7 @@ $reportCount = 0;
           <p>Analyze ingredients and effects</p>
         </div> -->
 
-        <div class="action-card" onclick="window.location.href = 'drug.html'">
+        <div class="action-card" onclick="window.location.href = 'drug.php'">
           <i class="fas fa-shield-alt orange"></i>
           <h3>Drug Compatibility</h3>
           <p>Check drug interactions</p>
@@ -113,11 +131,33 @@ $reportCount = 0;
           <p>Personalized safety check</p>
         </div>
 
-        <div class="action-card" onclick="window.location.href = 'homeremedies.html'">
+        <div class="action-card" onclick="window.location.href = 'homeremedies.php'">
           <i class="fas fa-home orange"></i>
           <h3>Home Remedies</h3>
           <p>Natural remedy suggestions</p>
         </div>
+      </div>
+
+      <h2 class="quick-title">Your Recent Activities</h2>
+
+      <div class="history">
+          <?php if(!empty($history)) {
+              foreach($history as $h) { 
+                  $typeIcon = $h['type'] == 'drug' ? 'fas fa-shield-alt orange' : ($h['type'] == 'safety' ? 'fas fa-heartbeat green' : 'fas fa-home orange');
+                  $typeName = ucfirst($h['type']);
+                  $resultText = htmlspecialchars($h['result']); // display safe
+          ?>
+              <div class="history-card">
+                  <i class="<?php echo $typeIcon; ?>"></i>
+                  <div class="history-info">
+                      <h3><?php echo $typeName; ?></h3>
+                      <p><?php echo $resultText; ?></p>
+                      <small><?php echo date('d M Y, H:i', strtotime($h['created_at'])); ?></small>
+                  </div>
+              </div>
+          <?php } } else { ?>
+              <p>No history yet.</p>
+          <?php } ?>
       </div>
     </section>
   <script>

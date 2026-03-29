@@ -134,22 +134,53 @@ async function checkSafety() {
 function displaySafetyResult(data) {
   const container = document.getElementById("results");
   container.innerHTML = "";
-
   const div = document.createElement("div");
   div.className = "result-card";
-  const isUnsafe = data.result.includes("Not") || data.result.includes("❌");
-  div.innerHTML = `
-    <h3>${data.medicine}</h3>
-    <p class="${isUnsafe ? "unsafe" : "safe"}">
-      ${data.result}
-    </p>
-    <p class="desc">${data.message || ""}</p>
+  const riskMap = {
+    "⚠ Not Safe": 85,
+    "❌ Unknown Medicine": 50,
+    "❌ Server Error": 50,
+    "✅ Safe": 20,
+  };
+  const risk = riskMap[data.result] || 40;
+  const chartId = "safetyChart";
+  const isUnsafe = data.result.includes("Not");
 
+  div.innerHTML = `
+    <h3>💊 ${data.medicine}</h3>
+    <p style="color:${isUnsafe ? "red" : "green"}; font-weight:bold;">
+      ${data.result} (${risk}% risk)
+    </p>
+    <div style="width:200px; margin:auto;">
+      <canvas id="${chartId}"></canvas>
+    </div>
+    <p class="desc">${data.message || ""}</p>
     ${
       data.ingredients && data.ingredients.length
         ? `<p><b>Ingredients:</b> ${data.ingredients.join(", ")}</p>`
         : ""
     }
   `;
+
   container.appendChild(div);
+  const ctx = document.getElementById(chartId).getContext("2d");
+  new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["Risk", "Safe"],
+      datasets: [
+        {
+          data: [risk, 100 - risk],
+          backgroundColor: ["#e74c3c", "#2ecc71"],
+        },
+      ],
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    },
+  });
 }

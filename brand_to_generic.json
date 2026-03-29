@@ -44,7 +44,7 @@
 
   "pan": ["pantoprazole"],
   "pantocid": ["pantoprazole"],
-  "pan d": ["Pantoprazole", "Domperidone"],
+  "pan-d": ["Pantoprazole", "Domperidone"],
   "omez": ["omeprazole"],
   "gelusil": ["aluminium hydroxide", "magnesium hydroxide"],
   "digene": ["aluminium hydroxide", "magnesium hydroxide", "simethicone"],

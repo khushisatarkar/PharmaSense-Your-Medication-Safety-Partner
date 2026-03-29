@@ -212,11 +212,11 @@ def get_profile():
 def safety_check():
     try:
         data = request.get_json(force=True)
+        print("Incoming:", data)
         medicine = data.get("medicine", "").lower().strip()
         age = int(data.get("age", 0))
-        allergies = [a.lower() for a in data.get("allergies", [])]
-        current_meds = data.get("currentMeds", [])
-        dosage = data.get("dosage", "once")
+        allergies = [a.lower().strip() for a in data.get("allergies", [])]
+        current_meds = [m.lower().strip() for m in data.get("currentMeds", [])]
 
         try:
             dosage_amount = int(data.get("dosageAmount", 0))
@@ -224,7 +224,6 @@ def safety_check():
             dosage_amount = 0
 
         ingredients = get_ingredients(medicine)
-
         if not ingredients:
             return jsonify({
                 "medicine": medicine,
@@ -240,7 +239,8 @@ def safety_check():
             ing_enc = 0
 
         try:
-            dosage_enc = le_dosage.transform([dosage])[0]
+            dosage_label = "high" if dosage_amount > 500 else "normal"
+            dosage_enc = le_dosage.transform([dosage_label])[0]
         except:
             dosage_enc = 0
 
@@ -252,57 +252,62 @@ def safety_check():
 
         features = [[ing_enc, age, dosage_enc, allergy_enc]]
         pred = safety_model.predict(features)[0]
-        issues = []
+        result = "⚠ Not Safe" if pred == 1 else "✅ Safe"
+        # confidence_msg = "ML-based safety prediction"
+        confidence_msg = "Please consult a healthcare professional in case of any other concerns."
+        interaction_warning = None
+
+        try:
+            all_drugs = current_meds + [medicine]
+            drug_data = convert_brands_to_smiles(all_drugs)
+            if len(drug_data) >= 2:
+                interactions = predict(drug_data)
+                unsafe_pairs = [
+                    f"{r['drug1']} + {r['drug2']}"
+                    for r in interactions if "Not Safe" in r["result"]
+                ]
+                if unsafe_pairs:
+                    interaction_warning = f"Interactions found: {', '.join(unsafe_pairs)}"
+                    result = "⚠ Not Safe"
+        except Exception as e:
+            print("Interaction model error:", e)
+
+        warnings = []
         for ing in ingredients:
             if ing in allergies:
-                issues.append(f"Allergic to {ing}")
-
-        if age < 12 and dosage == "daily":
-            issues.append("Not safe for daily use in children")
-
-
+                warnings.append(f"Allergic to {ing}")
 
         if "paracetamol" in ingredients:
             if dosage_amount > 650:
-                issues.append("High dosage for paracetamol (above 650mg)")
+                warnings.append("High dosage for paracetamol (>650mg)")
 
-            if dosage == "daily" and dosage_amount > 500:
-                issues.append("Daily dosage too high for paracetamol")
+        if age < 12 and dosage_amount > 500:
+            warnings.append("High dose for child")
 
+        # Duplicate ingredient explanation
         duplicates = check_duplicate_ingredients(current_meds + [medicine])
         if duplicates:
-            issues.append(f"Duplicate ingredient: {', '.join(duplicates)}")
+            warnings.append(f"Duplicate ingredient: {', '.join(duplicates)}")
+        message_parts = [confidence_msg]
+        if interaction_warning:
+            message_parts.append(interaction_warning)
 
-        if issues:
-            return jsonify({
-                "medicine": medicine,
-                "result": "⚠ Not Safe",
-                "message": " | ".join(issues),
-                "ingredients": ingredients
-            })
-        
-        if pred == 1:
-            return jsonify({
-                "medicine": medicine,
-                "result": "⚠ Not Safe",
-                "message": "Predicted unsafe based on dosage/age/ingredient pattern",
-                "ingredients": ingredients
-            })
-
+        if warnings:
+            message_parts.append("Warnings: " + " | ".join(warnings))
+        final_message = " | ".join(message_parts)
         return jsonify({
             "medicine": medicine,
-            "result": "⚠ Not Safe" if pred == 1 else "✅ Safe",
-            "message": "ML-based safety prediction",
+            "result": result,
+            "message": final_message,
             "ingredients": ingredients
         })
 
     except Exception as e:
-        print("ERROR:", str(e))
+        print("ERROR in /safety:", str(e))
         return jsonify({
             "result": "❌ Server Error",
             "message": str(e)
         }), 500
-
 
 if __name__ == "__main__":
     app.run(debug=True)
