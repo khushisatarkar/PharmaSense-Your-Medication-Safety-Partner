@@ -73,13 +73,8 @@ async function checkCompatibility() {
       body: JSON.stringify({ drugs: medications }),
     });
 
-    console.log("Raw response:", response);
-
-    const text = await response.text(); // 👈 IMPORTANT
-    console.log("Response text:", text);
-
-    const data = JSON.parse(text); // 👈 safer debugging
-    console.log("Parsed data:", data);
+    const text = await response.text();
+    const data = JSON.parse(text);
 
     if (data.error) {
       alert(data.error);
@@ -87,7 +82,15 @@ async function checkCompatibility() {
     }
 
     if (data.type === "warning") {
-      displayWarning(data);
+      const warningResult = {
+        drug1: medications[0],
+        drug2: medications[1],
+        result: data.override || "Not Safe",
+        message: data.message,
+        ingredients: data.ingredients,
+      };
+
+      displayResults([warningResult]);
     } else if (data.type === "prediction") {
       displayResults(data.results);
     } else {
@@ -99,35 +102,23 @@ async function checkCompatibility() {
   }
 }
 
-function displayWarning(data) {
-  const container = document.getElementById("results");
-  container.innerHTML = "";
-
-  const div = document.createElement("div");
-
-  div.style.border = "1px solid red";
-  div.style.padding = "15px";
-  div.style.margin = "10px 0";
-  div.style.borderRadius = "8px";
-  div.style.backgroundColor = "#ffe6e6";
-
-  div.innerHTML = `
-        <h3>⚠ Warning</h3>
-        <p>${data.message}</p>
-        <p><b>Common Ingredient:</b> ${data.ingredients.join(", ")}</p>
-    `;
-
-  container.appendChild(div);
-}
-
 function displayResults(results) {
   const container = document.getElementById("results");
   container.innerHTML = "";
 
-  results.forEach((r) => {
+  results.forEach((r, index) => {
     const div = document.createElement("div");
 
-    const isUnsafe = r.result.includes("Not");
+    const isUnsafe = r.result === "Not Safe";
+
+    const riskMap = {
+      "Not Safe": 85,
+      Moderate: 60,
+      Safe: 20,
+    };
+
+    const risk = riskMap[r.result] || 30;
+    const chartId = "chart" + index;
 
     div.style.border = "1px solid #ccc";
     div.style.padding = "15px";
@@ -135,19 +126,44 @@ function displayResults(results) {
     div.style.borderRadius = "8px";
 
     div.innerHTML = `
-            <h3>🧪 ${r.drug1} + ${r.drug2}</h3>
-            <p style="color: ${isUnsafe ? "red" : "green"}; font-weight: bold;">
-                ${r.result}
-            </p>
-            <p>
-                ${
-                  isUnsafe
-                    ? "Potential interaction detected. Consult a doctor."
-                    : "No major interaction detected."
-                }
-            </p>
-        `;
+      <h3>🧪 ${r.drug1} + ${r.drug2}</h3>
+
+      <p style="color:${isUnsafe ? "red" : "green"}; font-weight:bold;">
+        ${r.result} (${risk}%)
+      </p>
+
+      <div style="width:200px; margin:auto;">
+        <canvas id="${chartId}"></canvas>
+      </div>
+
+      <p>
+        ${
+          r.message
+            ? `${r.message}<br><b>Common Ingredient:</b> ${
+                r.ingredients ? r.ingredients.join(", ") : ""
+              }`
+            : isUnsafe
+              ? "⚠ High interaction risk. Consult a doctor."
+              : "✅ Low interaction risk."
+        }
+      </p>
+    `;
 
     container.appendChild(div);
+
+    const ctx = document.getElementById(chartId).getContext("2d");
+
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["Risk", "Safe"],
+        datasets: [
+          {
+            data: [risk, 100 - risk],
+            backgroundColor: ["#e74c3c", "#2ecc71"],
+          },
+        ],
+      },
+    });
   });
 }

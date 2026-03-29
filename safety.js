@@ -96,13 +96,15 @@ document.addEventListener("keypress", function (e) {
 });
 
 async function checkSafety() {
-  const medicine = document.getElementById("medicine").value.trim();
+  const medicine = document
+    .getElementById("medicine")
+    .value.trim()
+    .toLowerCase();
   const age = document.getElementById("age").value;
-  const dosage = document.getElementById("dosage").value;
   const dosageAmount = document.getElementById("dosageAmount").value;
 
-  if (!medicine || !age) {
-    alert("Enter medicine and age");
+  if (!medicine || !age || !dosageAmount) {
+    alert("Enter medicine, age and dosage");
     return;
   }
 
@@ -115,10 +117,9 @@ async function checkSafety() {
       body: JSON.stringify({
         medicine,
         age,
+        dosageAmount,
         allergies,
         currentMeds,
-        dosage,
-        dosageAmount,
       }),
     });
 

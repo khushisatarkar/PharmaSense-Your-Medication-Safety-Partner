@@ -157,7 +157,8 @@ def predict_api():
             return jsonify({
                 "type": "warning",
                 "ingredients": duplicates,
-                "message": "⚠ Duplicate active ingredient detected! This may cause overdose risk."
+                "message": "⚠ Duplicate active ingredient detected! This may cause overdose risk.",
+                "override": "Not Safe"
             })
 
         drug_data = convert_brands_to_smiles(brands)

@@ -41,9 +41,16 @@ if (!isset($_SESSION['user_id'])) {
       <div class="drug-box">
         <h3>Enter Details</h3>
 
-        <div class="drug-input">
-          <input type="text" id="medicine" placeholder="Enter medicine name" />
-        </div>
+        <div class="drug-input" style="display:flex; gap:10px;">
+        <input type="text" id="medicine" placeholder="Enter medicine name" />
+
+        <input
+          type="number"
+          id="dosageAmount"
+          placeholder="Dosage (mg)"
+          style="width:120px;"
+        />
+      </div>
 
         <div class="drug-input">
           <input type="number" id="age" placeholder="Enter age" />
