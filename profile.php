@@ -52,16 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </head>
 
     <body class="dashboard-body">
-        <header id="header">
+        <header class="sub-header" id="header">
             <a href="dashboard.php"><img src="logo.png" class="logo" /></a>
-
             <div class="dashboard-icons">
                 <i class="fas fa-sign-out-alt"></i>
             </div>
         </header>
         <div class="dashboard-container">
             <h1 class="title">My Profile</h1>
-            <!-- <button class="edit-btn" onclick="toggleEdit()">Edit Profile</button> -->
             <div class="profile-header">
             <div class="profile-name">
                 <img src="profile.png" alt="">
@@ -69,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="profile-text">
                     <div class="name-row">
                         <h2><?php echo $user['full_name']; ?></h2>
-                        
                         <i class="fas fa-pen edit-icon" onclick="toggleEdit()" title="Edit Profile"></i>
                     </div>
                     

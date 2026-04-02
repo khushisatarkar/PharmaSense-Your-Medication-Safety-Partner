@@ -44,6 +44,10 @@ body {
   width: 100%;
 }
 
+.section-p1 {
+  padding: 40px 80px;
+}
+
 .logo {
   height: 70px;
 }
@@ -716,6 +720,24 @@ body {
   border: 1px solid #ddd;
 }
 
+.drug-input.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.drug-input.row input {
+  flex: 0 !important;
+  width: 140px;
+}
+
+.drug-input.row .heading,
+.drug-input.row label {
+  margin: 0;
+  min-width: 80px;
+}
+
 .drug-input button,
 .savechanges button,
 .add-row button {
@@ -902,4 +924,232 @@ body {
 
 .pagination {
   text-align: center;
+}
+
+@media (max-width: 477px) {
+  .logo {
+    height: 50px;
+  }
+
+  #header {
+    padding: 20px 20px;
+  }
+
+  #dashboard {
+    padding: 140px 40px;
+  }
+
+  #dashboard h1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  #dashboard p {
+    font-size: 12px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    padding: 24px;
+  }
+
+  .stat-card p {
+    color: #777;
+    margin-bottom: 0px;
+  }
+
+  .stat-card h2 {
+    font-size: 24px;
+  }
+
+  .quick-title {
+    font-size: 26px;
+    margin-bottom: 0px;
+  }
+
+  .history {
+    font-size: 24px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .action-card {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 12px;
+  }
+
+  .action-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .action-card h3 {
+    font-size: 16px;
+  }
+
+  .action-card i {
+    font-size: 20px;
+  }
+
+  /* drug.php */
+  .sub-header {
+    padding: 25px 30px;
+  }
+
+  .sub-header h2 {
+    font-size: 18px;
+  }
+
+  #drug-check h1 {
+    font-size: 24px;
+    margin-bottom: 0px;
+  }
+
+  #drug-check h3 {
+    font-size: 18px;
+    padding-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .drug-input button,
+  .savechanges button,
+  .add-row button {
+    padding: 12px 16px;
+  }
+
+  /* safety analysis */
+  #drug-check h1 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .drug-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .drug-input.row {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .drug-input.row .heading {
+    margin: 0;
+    font-size: 18px;
+    min-width: 70px;
+  }
+
+  .drug-input.row h4 {
+    margin: 0;
+    min-width: 80px;
+  }
+
+  .drug-input.row input {
+    flex: 0 !important;
+    width: 120px;
+  }
+
+  .heading2 {
+    margin-top: 30px;
+  }
+
+  /* home remedies */
+  .result-card p {
+    font-size: 15px;
+  }
+
+  .pagination button,
+  .pagination span {
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+
+  /* profile */
+  .sub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .dashboard-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .profile-name {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .profile-name img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .profile-text h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .profile-text p {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .profile-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .profile-card p {
+    font-size: 14px;
+    color: #333;
+  }
 }

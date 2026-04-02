@@ -82,7 +82,7 @@ while($row = $historyResult->fetch_assoc()) {
       </div>
     </header>
 
-    <section id="dashboard">
+    <section id="dashboard" class="section-p1"> 
       <h1>Welcome, <?php echo $name; ?></h1>      
       <p class="dashboard-sub">
         Your health dashboard and medication management
@@ -121,20 +121,27 @@ while($row = $historyResult->fetch_assoc()) {
 
         <div class="action-card" onclick="window.location.href = 'drug.php'">
           <i class="fas fa-shield-alt orange"></i>
-          <h3>Drug Compatibility</h3>
-          <p>Check drug interactions</p>
+          <div class="action-text">
+            <h3>Drug Compatibility</h3>
+            <p>Check drug interactions</p>
+          </div>
+          
         </div>
 
         <div class="action-card" onclick="window.location.href = 'safety.php'">
           <i class="fas fa-heartbeat green"></i>
-          <h3>Safety Analysis</h3>
-          <p>Personalized safety check</p>
+          <div class="action-text">
+            <h3>Safety Analysis</h3>
+            <p>Personalized safety check</p>
+          </div>
         </div>
 
         <div class="action-card" onclick="window.location.href = 'homeremedies.php'">
           <i class="fas fa-home orange"></i>
-          <h3>Home Remedies</h3>
-          <p>Natural remedy suggestions</p>
+          <div class="action-text">
+            <h3>Home Remedies</h3>
+            <p>Natural remedy suggestions</p>
+          </div>
         </div>
       </div>
 
