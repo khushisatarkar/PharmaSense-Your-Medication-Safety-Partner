@@ -40,5 +40,19 @@ include "db.php";
   </section>
 
   <script src="script.js"></script>
+
+  <link rel="stylesheet" href="chatbot.css">
+  <script src="chatbot.js"></script>
+
+  <div id="chatbot-placeholder"></div>
+
+  <script>
+  fetch("/chatbot/chatbot.html")
+      .then(res => res.text())
+      .then(data => {
+          document.getElementById("chatbot-placeholder").innerHTML = data;
+      });
+  </script>
+
 </body>
 </html>

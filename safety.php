@@ -77,5 +77,19 @@ if(isset($_POST['submit'])) {
 
   <script>const USER_ID = <?php echo $_SESSION['user_id']; ?>;</script>
   <script src="safety.js"></script>
+
+  <link rel="stylesheet" href="chatbot.css">
+  <script src="chatbot.js"></script>
+
+  <div id="chatbot-placeholder"></div>
+
+  <script>
+  fetch("/chatbot/chatbot.html")
+      .then(res => res.text())
+      .then(data => {
+          document.getElementById("chatbot-placeholder").innerHTML = data;
+      });
+  </script>
+
 </body>
 </html>
