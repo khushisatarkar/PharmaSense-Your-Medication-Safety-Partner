@@ -7,32 +7,32 @@ const intents = [
     {
         keywords: ["new pills", "new medicine", "started medicine"],
         response: "Redirecting to update medicines...",
-        page: "profile.php"
+        page: "./profile.php"
     },
     {
         keywords: ["allergy", "new allergy"],
         response: "Redirecting to update allergies...",
-        page: "profile.php"
+        page: "./profile.php"
     },
     {
         keywords: ["edit profile", "update profile"],
         response: "Opening your profile...",
-        page: "profile.php"
+        page: "./profile.php"
     },
     {
         keywords: ["interaction", "drug interaction", "react"],
         response: "Opening interaction checker...",
-        page: "drug.php"
+        page: "./drug.php"
     },
     {
         keywords: ["safe", "is it safe"],
         response: "Checking safety...",
-        page: "safety.php"
+        page: "./safety.php"
     },
     {
         keywords: ["home remedy", "remedy"],
         response: "Showing home remedies...",
-        page: "homeremedies.php"
+        page: "./homeremedies.php"
     }
 ];
 
