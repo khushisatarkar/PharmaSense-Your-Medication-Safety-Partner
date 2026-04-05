@@ -109,7 +109,7 @@
   cursor: pointer;
 }
 
-/* Button inside chat */
+/* button inside chat */
 .chat-btn {
   display: inline-block;
   margin-top: 6px;
@@ -119,4 +119,29 @@
   border-radius: 8px;
   text-decoration: none;
   font-size: 13px;
+}
+
+#suggestions {
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+
+#suggestions button {
+  border: none;
+  background: #e4e6eb;
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#suggestions button:hover {
+  background: #28a745;
+  color: white;
+  transform: scale(1.05);
 }

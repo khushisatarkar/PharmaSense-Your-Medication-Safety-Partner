@@ -13,6 +13,15 @@
 
       <div id="chatbox"></div>
 
+      <div id="suggestions">
+        <button onclick="quickMessage('Check drug interaction')">
+          💊 Drug Interaction
+        </button>
+        <button onclick="quickMessage('Is this safe?')">🛡 Safety Check</button>
+        <button onclick="quickMessage('Home remedies')">🌿 Remedies</button>
+        <button onclick="quickMessage('Update profile')">👤 Profile</button>
+      </div>
+
       <div id="chat-input">
         <input type="text" id="userInput" placeholder="Type your message..." />
         <button id="sendBtn" onclick="sendMessage()">Send</button>

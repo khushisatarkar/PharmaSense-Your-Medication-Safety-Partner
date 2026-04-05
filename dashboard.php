@@ -197,5 +197,8 @@ while($row = $historyResult->fetch_assoc()) {
   </script>
 
   <script src="chatbot.js"></script>
+
+  <?php include "footer.php"; ?>
+  
   </body>
 </html>

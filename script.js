@@ -171,6 +171,12 @@ function displayResults(results) {
               : "✅ Low interaction risk."
         }
       </p>
+
+      <!-- Medical Disclaimer -->
+      <div class="medical-disclaimer">
+        <strong>Medical Disclaimer:</strong>
+        This tool provides informational support only and is not a substitute for professional medical advice, diagnosis, or treatment.
+      </div>
     `;
 
     container.appendChild(div);
