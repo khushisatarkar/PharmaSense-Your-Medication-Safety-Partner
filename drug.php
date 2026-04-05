@@ -47,7 +47,7 @@ include "db.php";
   <div id="chatbot-placeholder"></div>
 
   <script>
-  fetch("/chatbot/chatbot.html")
+  fetch("chatbot.html")
       .then(res => res.text())
       .then(data => {
           document.getElementById("chatbot-placeholder").innerHTML = data;

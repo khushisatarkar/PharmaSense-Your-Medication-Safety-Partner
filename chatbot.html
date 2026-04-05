@@ -1,25 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <title>My Page</title>
+  <head>
+    <title>ChatBot</title>
+    <link rel="stylesheet" href="chatbot.css" />
+  </head>
 
-    <!-- ✅ Chatbot CSS -->
-    <link rel="stylesheet" href="chatbot.css">
-</head>
-
-<body>
-    <!-- ✅ Chatbot HTML -->
+  <body>
     <div id="chatbot-icon" onclick="toggleChat()">💬</div>
 
     <div id="chatbot-container">
-        <div id="chat-header">PharmaBot 🤖</div>
-        <div id="chatbox"></div>
-        <input type="text" id="userInput" placeholder="Hi! How can I help you today?" />
-        <button onclick="sendMessage()">Send</button>
+      <div id="chat-header">PharmaBot 🤖</div>
+
+      <div id="chatbox"></div>
+
+      <div id="chat-input">
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button id="sendBtn" onclick="sendMessage()">Send</button>
+      </div>
     </div>
 
-    <!-- ✅ Chatbot JS -->
     <script src="chatbot.js"></script>
-
-</body>
+  </body>
 </html>

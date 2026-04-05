@@ -63,6 +63,7 @@ while($row = $historyResult->fetch_assoc()) {
     <title>Dashboard | Pharmasense</title>
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="chatbot.css">
 
     <link
       rel="stylesheet"
@@ -182,23 +183,19 @@ while($row = $historyResult->fetch_assoc()) {
               <p>No history yet.</p>
           <?php } ?>
       </div>
-    </section>
-  <script>
-    const USER_ID = <?php echo $_SESSION['user_id']; ?>;
-  </script>
-
-  <link rel="stylesheet" href="chatbot.css">
-  <script src="chatbot.js"></script>
-
+    </section>  
   <div id="chatbot-placeholder"></div>
 
   <script>
-  fetch("/chatbot/chatbot.html")
+  const USER_ID = <?php echo $_SESSION['user_id']; ?>;
+
+  fetch("chatbot.html")
       .then(res => res.text())
       .then(data => {
           document.getElementById("chatbot-placeholder").innerHTML = data;
       });
   </script>
 
+  <script src="chatbot.js"></script>
   </body>
 </html>
