@@ -56,5 +56,13 @@ include "db.php";
 
   <?php include "footer.php"; ?>
 
+  <div id="suggestionPopup" class="popup hidden">
+    <div class="popup-box">
+      <p id="suggestionText"></p>
+      <button class="primary-btn" onclick="acceptSuggestion()">Yes</button>
+      <button class="primary-btn" onclick="rejectSuggestion()">No</button>
+    </div>
+  </div>
+
 </body>
 </html>

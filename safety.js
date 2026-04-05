@@ -1,6 +1,13 @@
 console.log(USER_ID);
 let allergies = [];
 let currentMeds = [];
+const medicines = [
+  "crocin",
+  "paracetamol",
+  "ibuprofen",
+  "aspirin",
+  "amoxicillin",
+];
 
 window.onload = async function () {
   console.log("USER_ID inside onload:", USER_ID);
@@ -95,11 +102,64 @@ document.addEventListener("keypress", function (e) {
   }
 });
 
+function medicineExists(value) {
+  return medicines.some((med) => med.toLowerCase() === value);
+}
+
+function handleNotFound(value) {
+  const suggestion = getClosestMatch(value, medicines);
+
+  if (suggestion) {
+    showSuggestionPopup(value, suggestion);
+  } else {
+    alert("Medicine not found in database");
+  }
+}
+
+let pendingValue = "";
+let correctedValue = "";
+
+function showSuggestionPopup(original, suggestion) {
+  pendingValue = original;
+  correctedValue = suggestion;
+
+  document.getElementById("suggestionText").innerText =
+    `Did you mean "${suggestion}" instead of "${original}"?`;
+
+  document.getElementById("suggestionPopup").classList.remove("hidden");
+}
+
+function acceptSuggestion() {
+  document.getElementById("medicine").value = correctedValue;
+  closePopup();
+  checkSafety();
+}
+
+function rejectSuggestion() {
+  closePopup();
+}
+
+function closePopup() {
+  document.getElementById("suggestionPopup").classList.add("hidden");
+}
+
 async function checkSafety() {
+  const medicineInput = document.getElementById("medicine");
   const medicine = document
     .getElementById("medicine")
     .value.trim()
     .toLowerCase();
+
+  if (!medicine) {
+    alert("Please enter a medicine name");
+    return;
+  }
+
+  if (!medicineExists(medicine)) {
+    handleNotFound(medicine);
+    return;
+  }
+
   const age = document.getElementById("age").value;
   const dosageAmount = document.getElementById("dosageAmount").value;
 
@@ -147,6 +207,50 @@ async function checkSafety() {
     alert("Backend error");
     console.log(err);
   }
+}
+
+function getClosestMatch(input, list) {
+  input = input.toLowerCase();
+
+  let closest = null;
+  let minDistance = Infinity;
+
+  list.forEach((item) => {
+    const dist = levenshtein(input, item.toLowerCase());
+    if (dist < minDistance) {
+      minDistance = dist;
+      closest = item;
+    }
+  });
+
+  if (minDistance <= 2 && closest !== input) {
+    return closest;
+  }
+
+  return null;
+}
+
+function levenshtein(a, b) {
+  const matrix = [];
+
+  for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+  for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j] + 1,
+        );
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
 }
 
 function displaySafetyResult(data) {
