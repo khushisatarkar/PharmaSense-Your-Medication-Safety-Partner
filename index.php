@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +11,74 @@
     />
     <title>PharmaSense</title>
     <link rel="stylesheet" href="style.css" />
+
+    <style>
+      /* Smooth scroll */
+      html { scroll-behavior: smooth; }
+
+      /* Initial hidden state for animations */
+      .hidden {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+      }
+
+      .show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Slide from left */
+      .slide-left {
+        transform: translateX(-80px);
+      }
+
+      .slide-right {
+        transform: translateX(80px);
+      }
+
+      .show.slide-left,
+      .show.slide-right {
+        transform: translateX(0);
+      }
+
+      /* Hero floating image */
+      .hero-img img {
+        animation: float 4s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+      }
+
+      /* Button hover animation */
+      button {
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        transform: scale(1.05);
+      }
+
+      /* Feature card hover */
+      .feature-box {
+        transition: all 0.3s ease;
+      }
+
+      .feature-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      }
+
+      /* Fade-in stagger */
+      .feature-box:nth-child(1) { transition-delay: 0.1s; }
+      .feature-box:nth-child(2) { transition-delay: 0.2s; }
+      .feature-box:nth-child(3) { transition-delay: 0.3s; }
+    </style>
   </head>
+
   <body>
     <header id="header">
       <a href="#index.php"><img src="logo.png" class="logo" alt="" /></a>
@@ -23,7 +91,7 @@
     </header>
 
     <section id="hero">
-      <div class="hero-text">
+      <div class="hero-text hidden slide-left">
         <h1>
           Your <span>Medication</span><br />
           <span>Safety</span> Partner
@@ -31,96 +99,77 @@
 
         <p>
           Analyze medications, check drug interactions, and discover safe home
-          remedies. Pharmasense provides intelligent health insights tailored to
-          your profile.
+          remedies.
         </p>
 
         <div class="hero-buttons">
-          <a href="signup.html"></a
-          ><button class="primary-btn">Start Free Analysis</button>
+          <a href="signup.html"></a>
+          <button class="primary-btn">Start Free Analysis</button>
           <button class="secondary-btn">Learn More</button>
         </div>
 
         <div class="disclaimer">
           <span class="line"></span>
           <p>
-            <b>Medical Disclaimer:</b> Pharmasense provides informational
-            support only and is not a substitute for professional medical
-            advice, diagnosis, or treatment.
+            <b>Medical Disclaimer:</b> Informational only. Not medical advice.
           </p>
         </div>
       </div>
 
-      <div class="hero-img">
+      <div class="hero-img hidden slide-right">
         <img src="doctor.jpg" alt="" />
       </div>
     </section>
 
     <section id="features">
-      <div class="features-title">
+      <div class="features-title hidden">
         <h2>Comprehensive Health Features</h2>
-        <p>Everything you need for medication safety</p>
+        <p>Everything you need for safe medication management</p>
       </div>
 
       <div class="features-container">
-        <!-- <div class="feature-box">
-          <div class="icon green">
-            <i class="fas fa-capsules"></i>
-          </div>
-          <h3>Ingredient Checker</h3>
-          <p>
-            Detailed analysis of active ingredients, purposes, and side effects
-          </p>
-        </div> -->
-
-        <div class="feature-box">
+        <div class="feature-box hidden">
           <div class="icon orange">
             <i class="fas fa-shield-alt"></i>
           </div>
           <h3>Drug Compatibility</h3>
-          <p>
-            Check interactions between multiple medications with severity
-            ratings
-          </p>
+          <p>Check interactions with severity ratings</p>
         </div>
 
-        <div class="feature-box">
+        <div class="feature-box hidden">
           <div class="icon green">
             <i class="fas fa-heartbeat"></i>
           </div>
           <h3>Safety Analysis</h3>
-          <p>Personalized safety assessment based on your health profile</p>
+          <p>Personalized assessment</p>
         </div>
 
-        <div class="feature-box" onclick="goToRemedies()">
+        <div class="feature-box hidden" onclick="goToRemedies()">
           <div class="icon orange">
             <i class="fas fa-home"></i>
           </div>
           <h3>Home Remedies</h3>
-          <p>Natural, safe remedies for common ailments and conditions</p>
+          <p>Safe natural remedies</p>
         </div>
       </div>
     </section>
 
     <section id="analysis">
-      <div class="analysis-img">
+      <div class="analysis-img hidden slide-left">
         <img src="pills.jpg" alt="Medicine" />
       </div>
 
-      <div class="analysis-text">
-        <h2>Intelligent Analysis, Personalized Results</h2>
+      <div class="analysis-text hidden slide-right">
+        <h2>Intelligent Analysis</h2>
 
         <p class="analysis-desc">
-          Our AI-powered platform analyzes your unique health profile including
-          age, conditions, allergies, and current medications to provide
-          tailored safety recommendations.
+          AI-powered personalized safety recommendations.
         </p>
 
         <div class="analysis-point">
           <i class="fas fa-check"></i>
           <div>
             <h4>Comprehensive Profile</h4>
-            <p>Track conditions, allergies, and medications</p>
           </div>
         </div>
 
@@ -128,7 +177,6 @@
           <i class="fas fa-check"></i>
           <div>
             <h4>Real-time Analysis</h4>
-            <p>Instant insights powered by advanced AI</p>
           </div>
         </div>
 
@@ -136,25 +184,28 @@
           <i class="fas fa-check"></i>
           <div>
             <h4>Safety First</h4>
-            <p>Color-coded warnings and clear recommendations</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- <link rel="stylesheet" href="chatbot.css" />
-    <script src="chatbot.js"></script>
-
-    <div id="chatbot-placeholder"></div>
+    <?php include "footer.php"; ?>
 
     <script>
-      fetch("/chatbot/chatbot.html")
-        .then((res) => res.text())
-        .then((data) => {
-          document.getElementById("chatbot-placeholder").innerHTML = data;
+      // Scroll animation
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
         });
-    </script> -->
+      });
 
-    <?php include "footer.php"; ?>
+      document.querySelectorAll(".hidden").forEach((el) => observer.observe(el));
+
+      function goToRemedies() {
+        window.location.href = "remedies.php";
+      }
+    </script>
   </body>
 </html>

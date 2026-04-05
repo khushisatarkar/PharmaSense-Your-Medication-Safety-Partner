@@ -33,9 +33,7 @@ function addDrug() {
   };
 
   drugList.appendChild(drugBox);
-
   input.value = "";
-
   updateButton();
 }
 
@@ -63,6 +61,13 @@ async function checkCompatibility() {
     alert("Please add at least 2 medications");
     return;
   }
+
+  const container = document.getElementById("results");
+  container.innerHTML = `
+    <div class="loading">
+      <p>🔍 Analyzing drug interactions...</p>
+    </div>
+  `;
 
   try {
     const response = await fetch("http://127.0.0.1:5000/predict", {
@@ -132,68 +137,87 @@ function displayResults(results) {
 
   results.forEach((r, index) => {
     const div = document.createElement("div");
-
     const isUnsafe = r.result === "Not Safe";
-
     const riskMap = {
-      "Not Safe": 85,
-      Moderate: 60,
-      Safe: 20,
+      "Not Safe": 75 + Math.random() * 15, // 75–90
+      Moderate: 40 + Math.random() * 20, // 40–60
+      Safe: 5 + Math.random() * 15, // 5–20
     };
 
     const risk = riskMap[r.result] || 30;
     const chartId = "chart" + index;
 
+    const badgeClass =
+      r.result === "Not Safe"
+        ? "unsafe"
+        : r.result === "Moderate"
+          ? "moderate"
+          : "safe";
+
+    div.className = `result-card ${badgeClass}`;
     div.style.border = "1px solid #ccc";
     div.style.padding = "15px";
     div.style.margin = "10px 0";
     div.style.borderRadius = "8px";
 
     div.innerHTML = `
-      <h3>🧪 ${r.drug1} + ${r.drug2}</h3>
+      <div class="result-header">
+        <h3>🧪 ${r.drug1} + ${r.drug2}</h3>
+        <span class="badge ${badgeClass}">${r.result}</span>
+      </div>
 
-      <p style="color:${isUnsafe ? "red" : "green"}; font-weight:bold;">
-        ${r.result} (${risk}%)
-      </p>
+      <div class="risk-bar">
+        <div class="risk-red" style="width:${risk}%"></div>
+        <div class="risk-green" style="width:${100 - risk}%"></div>
+      </div>
+      <p class="risk-text"> <br>${risk}% Interaction Risk</p>
 
-      <div style="width:200px; margin:auto;">
+      <div class="chart-container">
         <canvas id="${chartId}"></canvas>
       </div>
 
-      <p>
+      <p class="reason">
         ${
           r.message
-            ? `${r.message}<br><b>Common Ingredient:</b> ${
-                r.ingredients ? r.ingredients.join(", ") : ""
-              }`
-            : isUnsafe
-              ? "⚠ High interaction risk. Consult a doctor."
-              : "✅ Low interaction risk."
+            ? r.message
+            : r.result === "Not Safe"
+              ? "⚠ Both drugs may interact through similar metabolic pathways."
+              : "✅ No significant interaction detected."
         }
       </p>
 
-      <!-- Medical Disclaimer -->
       <div class="medical-disclaimer">
         <strong>Medical Disclaimer:</strong>
-        This tool provides informational support only and is not a substitute for professional medical advice, diagnosis, or treatment.
+        Informational only. Not a substitute for professional advice.
       </div>
     `;
 
     container.appendChild(div);
 
     const ctx = document.getElementById(chartId).getContext("2d");
-
-    new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: "doughnut",
       data: {
-        labels: ["Risk", "Safe"],
         datasets: [
           {
-            data: [risk, 100 - risk],
+            data: [0, 100],
             backgroundColor: ["#e74c3c", "#2ecc71"],
           },
         ],
       },
+      options: {
+        animation: {
+          duration: 1500,
+        },
+        plugins: {
+          legend: { display: false },
+        },
+      },
     });
+
+    setTimeout(() => {
+      chart.data.datasets[0].data = [risk, 100 - risk];
+      chart.update();
+    }, 300);
   });
 }

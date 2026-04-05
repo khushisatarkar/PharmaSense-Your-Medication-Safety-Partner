@@ -150,6 +150,7 @@ while($row = $historyResult->fetch_assoc()) {
       <div class="history">
           <?php if(!empty($history)) {
               foreach($history as $h) { 
+                  $typeClass = $h['type'] == 'drug' ? 'drug' : ($h['type'] == 'safety' ? 'safety' : 'remedy');
                   $typeIcon = $h['type'] == 'drug' ? 'fas fa-shield-alt orange' : ($h['type'] == 'safety' ? 'fas fa-heartbeat green' : 'fas fa-home orange');
                   $typeName = ucfirst($h['type']);
                   $resultText = htmlspecialchars($h['result']); // display safe
@@ -166,18 +167,19 @@ while($row = $historyResult->fetch_assoc()) {
                       $label = "N/A";
                   }
           ?>
-              <div class="history-card">
-                  <i class="<?php echo $typeIcon; ?>"></i>
-                  <div class="history-info">
-                      <h3><?php echo $typeName; ?></h3>
-                      <p style="display:flex; justify-content:space-between; align-items:center;">
-                          <span><b><?php echo htmlspecialchars($label); ?></b></span>
-                          <span style="color: <?php echo (strpos($h['result'], 'Safe') !== false && strpos($h['result'], 'Not') === false) ? 'green' : 'red'; ?>">
-                              <?php echo htmlspecialchars($h['result']); ?>
-                          </span>
-                      </p>
-                      <small><?php echo date('d M Y, H:i', strtotime($h['created_at'])); ?></small>
+              <div class="history-card <?php echo $typeClass; ?>">
+                <i class="<?php echo $typeIcon; ?>"></i>
+                <div class="history-info">
+                  <h3><?php echo $typeName; ?></h3>
+                  <div class="history-row">
+                    <span class="history-label"><?php echo htmlspecialchars($label); ?></span>
+                    <span class="history-badge 
+                      <?php echo (strpos($h['result'], 'Safe') !== false && strpos($h['result'], 'Not') === false) ? 'safe' : 'unsafe'; ?>">
+                      <?php echo htmlspecialchars($h['result']); ?>
+                    </span>
                   </div>
+                  <small><?php echo date('d M Y, H:i', strtotime($h['created_at'])); ?></small>
+                </div>
               </div>
           <?php } } else { ?>
               <p>No history yet.</p>
@@ -199,6 +201,6 @@ while($row = $historyResult->fetch_assoc()) {
   <script src="chatbot.js"></script>
 
   <?php include "footer.php"; ?>
-  
+
   </body>
 </html>
