@@ -13,7 +13,7 @@
   </head>
   <body>
     <header id="header">
-      <a href="#index.html"><img src="logo.png" class="logo" alt="" /></a>
+      <a href="#index.php"><img src="logo.png" class="logo" alt="" /></a>
 
       <div>
         <ul id="navbar">
@@ -154,5 +154,7 @@
           document.getElementById("chatbot-placeholder").innerHTML = data;
         });
     </script> -->
+
+    <?php include "footer.php"; ?>
   </body>
 </html>
