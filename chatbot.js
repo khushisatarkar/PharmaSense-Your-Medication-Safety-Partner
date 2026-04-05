@@ -1,6 +1,11 @@
 function toggleChat() {
     let chat = document.getElementById("chatbot-container");
-    chat.style.display = (chat.style.display === "none") ? "flex" : "none";
+
+    if (chat.style.display === "flex") {
+        chat.style.display = "none";
+    } else {
+        chat.style.display = "flex";
+    }
 }
 
 const intents = [
@@ -37,8 +42,11 @@ const intents = [
 ];
 
 function sendMessage() {
-    let input = document.getElementById("userInput").value.toLowerCase();
+    let inputField = document.getElementById("userInput");
+    let input = inputField.value.toLowerCase();
     let chatbox = document.getElementById("chatbox");
+
+    if (input.trim() === "") return;
 
     chatbox.innerHTML += `<p><b>You:</b> ${input}</p>`;
 
@@ -47,6 +55,9 @@ function sendMessage() {
             if (input.includes(keyword)) {
 
                 chatbox.innerHTML += `<p><b>Bot:</b> ${intent.response}</p>`;
+
+                chatbox.scrollTop = chatbox.scrollHeight;
+                inputField.value = "";
 
                 setTimeout(() => {
                     window.location.href = intent.page;
@@ -58,4 +69,7 @@ function sendMessage() {
     }
 
     chatbox.innerHTML += `<p><b>Bot:</b> Try asking about medicines, allergies, or remedies.</p>`;
+
+    chatbox.scrollTop = chatbox.scrollHeight;
+    inputField.value = "";
 }
