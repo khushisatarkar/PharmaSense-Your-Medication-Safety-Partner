@@ -11,11 +11,92 @@ async function loadMedicineData() {
 }
 
 loadMedicineData();
+
 function getAllMedicineNames() {
   return Object.keys(brandToGeneric);
 }
+
 let pendingValue = "";
 let correctedValue = "";
+
+// find common ingredients
+function findCommonIngredients(drug1, drug2) {
+  const ing1 = brandToGeneric[drug1] || [];
+  const ing2 = brandToGeneric[drug2] || [];
+  return ing1.filter((i) => ing2.includes(i));
+}
+
+// generate main reasoning
+function generateReason(drug1, drug2, result) {
+  const common = findCommonIngredients(drug1, drug2);
+
+  if (common.length > 0) {
+    return {
+      reason: `Both medicines contain ${common.join(", ")}.`,
+      risk: `Taking them together may lead to overdose or increased side effects.`,
+      common: common,
+    };
+  }
+
+  if (result === "Not Safe") {
+    return {
+      reason: "These drugs may interact through metabolic pathways.",
+      risk: "May cause harmful side effects when combined.",
+      common: [],
+    };
+  }
+
+  return {
+    reason: "No common harmful interaction detected.",
+    risk: "Safe when used as prescribed.",
+    common: [],
+  };
+}
+
+async function getAdditionalInfo(drug1, drug2) {
+  try {
+    const res1 = await fetch(
+      `https://api.fda.gov/drug/label.json?search=openfda.brand_name:"${drug1}"&limit=1`,
+    );
+    const res2 = await fetch(
+      `https://api.fda.gov/drug/label.json?search=openfda.brand_name:"${drug2}"&limit=1`,
+    );
+    const data1 = await res1.json();
+    const data2 = await res2.json();
+
+    function extractCommonEffects(data) {
+      if (!data.results || !data.results[0].adverse_reactions) return [];
+      const text = data.results[0].adverse_reactions.join(" ").toLowerCase();
+      // common keywords to extract
+      const keywords = [
+        "nausea",
+        "diarrhea",
+        "headache",
+        "dizziness",
+        "fatigue",
+        "muscle pain",
+        "joint pain",
+        "abdominal pain",
+        "fever",
+        "vomiting",
+      ];
+
+      let found = [];
+      keywords.forEach((k) => {
+        if (text.includes(k)) found.push(k);
+      });
+      return found;
+    }
+    const effects1 = extractCommonEffects(data1);
+    const effects2 = extractCommonEffects(data2);
+    // merge + remove duplicates
+    const combined = [...new Set([...effects1, ...effects2])];
+    return combined.length > 0 ? combined : null;
+  } catch (e) {
+    console.error("API Error:", e);
+    return null;
+  }
+}
 
 function addDrug() {
   const input = document.getElementById("drugInput");
@@ -29,7 +110,7 @@ function addDrug() {
   }
 
   const lowerDrug = drugName.toLowerCase();
-  // prevent duplicates
+
   if (medications.includes(lowerDrug)) {
     alert("Medication already added.");
     input.value = "";
@@ -54,7 +135,6 @@ function addDrug() {
       <i class="fas fa-times"></i>
     `;
 
-  // delete medication
   drugBox.querySelector("i").onclick = function () {
     drugBox.remove();
     medications = medications.filter((m) => m !== lowerDrug);
@@ -80,7 +160,6 @@ function handleNotFound(value) {
   }
 }
 
-// suggestion popup
 function showSuggestionPopup(original, suggestion) {
   pendingValue = original;
   correctedValue = suggestion;
@@ -132,7 +211,6 @@ function addCorrectedDrug(drugName) {
   updateButton();
 }
 
-// fuzzy matching
 function getClosestMatch(input, list) {
   input = input.toLowerCase();
 
@@ -189,7 +267,6 @@ function updateButton() {
   }
 }
 
-// allow enter key
 document.getElementById("drugInput").addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     addDrug();
@@ -204,10 +281,10 @@ async function checkCompatibility() {
 
   const container = document.getElementById("results");
   container.innerHTML = `
-      <div class="loading">
-        <p>🔍 Analyzing drug interactions...</p>
-      </div>
-    `;
+    <div class="loading">
+      <p>🔍 Analyzing drug interactions...</p>
+    </div>
+  `;
 
   try {
     const response = await fetch("http://127.0.0.1:5000/predict", {
@@ -217,147 +294,138 @@ async function checkCompatibility() {
       },
       body: JSON.stringify({ drugs: medications }),
     });
-
-    const text = await response.text();
-    const data = JSON.parse(text);
-
+    const data = await response.json();
     if (data.error) {
       alert(data.error);
       return;
     }
 
+    let resultsToSave = [];
     if (data.type === "warning") {
       const warningResult = {
         drug1: medications[0],
         drug2: medications[1],
         result: data.override || "Not Safe",
         message: data.message,
-        ingredients: data.ingredients,
       };
-
-      displayResults([warningResult]);
-
-      await fetch("save_history.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "drug",
-          input: medications,
-          result: warningResult.result,
-        }),
-      });
+      resultsToSave = [warningResult];
+      await displayResults(resultsToSave);
     } else if (data.type === "prediction") {
-      displayResults(data.results);
-
-      await fetch("save_history.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "drug",
-          input: medications,
-          result: data.results.map((r) => r.result).join(", "),
-        }),
-      });
+      resultsToSave = data.results;
+      await displayResults(resultsToSave);
     } else {
       alert("Unexpected response format");
+      return;
     }
+
+    await fetch("save_history.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "drug",
+        input: medications,
+        result: resultsToSave.map((r) => r.result).join(", "),
+      }),
+    });
   } catch (error) {
-    console.error("FRONTEND ERROR:", error);
-    alert("Backend error. Make sure Flask is running.");
+    console.error("ERROR:", error);
+    alert("Backend error. Make sure Flask server is running.");
   }
 }
 
-function displayResults(results) {
+async function displayResults(results) {
   const container = document.getElementById("results");
   container.innerHTML = "";
 
-  results.forEach((r, index) => {
+  for (const r of results) {
     const div = document.createElement("div");
-    const isUnsafe = r.result === "Not Safe";
-    const riskMap = {
-      "Not Safe": 75 + Math.random() * 15,
-      Moderate: 40 + Math.random() * 20,
-      Safe: 5 + Math.random() * 15,
-    };
 
-    const risk = riskMap[r.result] || 30;
-    const chartId = "chart" + index;
+    const badgeClass = r.result === "Not Safe" ? "unsafe" : "safe";
 
-    const badgeClass =
-      r.result === "Not Safe"
-        ? "unsafe"
-        : r.result === "Moderate"
-          ? "moderate"
-          : "safe";
+    const explanation = generateReason(r.drug1, r.drug2, r.result);
+    const apiInfo = await getAdditionalInfo(r.drug1, r.drug2);
+
+    const ing1 = brandToGeneric[r.drug1] || [];
+    const ing2 = brandToGeneric[r.drug2] || [];
 
     div.className = `result-card ${badgeClass}`;
-    div.style.border = "1px solid #ccc";
-    div.style.padding = "15px";
-    div.style.margin = "10px 0";
-    div.style.borderRadius = "8px";
 
     div.innerHTML = `
-        <div class="result-header">
-          <h3>🧪 ${r.drug1} + ${r.drug2}</h3>
-          <span class="badge ${badgeClass}">${r.result}</span>
-        </div>
+    <div class="result-hero ${badgeClass}">
+      <div class="result-status">${r.result === "Not Safe" ? "⚠ NOT SAFE" : "✅ SAFE"}</div>
+      <div class="result-drugs">${r.drug1} + ${r.drug2}</div>
+    </div>
 
-        <div class="risk-bar">
-          <div class="risk-red" style="width:${risk}%"></div>
-          <div class="risk-green" style="width:${100 - risk}%"></div>
-        </div>
-        <p class="risk-text"> <br>${risk}% Interaction Risk</p>
+    <div class="card ">
+      <h3>🤔 Why this result?</h3>
+      <p>${explanation.reason}</p>
+      <p class="note"><strong>⚠ Risk:</strong> ${explanation.risk}</p>
+    </div>
 
-        <div class="chart-container">
-          <canvas id="${chartId}"></canvas>
-        </div>
+    <div class="card ">
+      <h3>🧬 Ingredient Comparison</h3>
+      <table class="ingredient-table">
+        <tr>
+          <th>${r.drug1}</th>
+          <th>${r.drug2}</th>
+        </tr>
+        <tr>
+          <td>${ing1.join("<br>")}</td>
+          <td>${ing2.join("<br>")}</td>
+        </tr>
+      </table>
 
-        <p class="reason">
-          ${
-            r.message
-              ? r.message
-              : r.result === "Not Safe"
-                ? "⚠ Both drugs may interact through similar metabolic pathways."
-                : "✅ No significant interaction detected."
-          }
+      ${
+        explanation.common.length > 0
+          ? `<p class="highlight">⚠ Common Ingredient: ${explanation.common.join(", ")}</p>`
+          : `<p class="safe-text">✅ No common ingredients</p>`
+      }
+    </div>
+
+    ${
+      apiInfo && apiInfo.length > 0
+        ? `
+      <div class="card">
+        <h3>Possible Side Effects</h3>
+        <ul class="effects-list">
+          ${apiInfo.map((e) => `<li>${e}</li>`).join("")}
+        </ul>
+        <p class="note">
+          ⚠ Showing only the most common side effects. There may be other side effects not listed.
         </p>
+      </div>`
+        : `
+      <div class="card">
+        <h3>👉 Possible Side Effects</h3>
+        <p>No common side effects data available.</p>
+      </div>`
+    }
 
-        <div class="medical-disclaimer">
-          <strong>Medical Disclaimer:</strong>
-          Informational only. Not a substitute for professional advice.
-        </div>
-      `;
+    <div class="card ">
+      <h3>💡 Recommendation</h3>
+      <p>${
+        r.result === "Not Safe"
+          ? "Avoid taking these medicines together unless prescribed by a doctor."
+          : "Safe when taken as directed, but consult a professional if unsure."
+      }</p>
+    </div>
 
+    <div class="card disclaimer">
+      <strong>Medical Disclaimer:</strong>
+      Informational only. Not a substitute for professional advice.
+    </div>
+  `;
     container.appendChild(div);
 
-    const ctx = document.getElementById(chartId).getContext("2d");
-    const chart = new Chart(ctx, {
-      type: "doughnut",
-      data: {
-        datasets: [
-          {
-            data: [0, 100],
-            backgroundColor: ["#e74c3c", "#2ecc71"],
-          },
-        ],
-      },
-      options: {
-        animation: {
-          duration: 1500,
-        },
-        plugins: {
-          legend: { display: false },
-        },
-      },
-    });
+    div.style.opacity = "0";
+    div.style.transform = "translateY(20px)";
 
     setTimeout(() => {
-      chart.data.datasets[0].data = [risk, 100 - risk];
-      chart.update();
-    }, 300);
-  });
+      div.style.transition = "all 0.5s ease";
+      div.style.opacity = "1";
+      div.style.transform = "translateY(0)";
+    }, 100);
+  }
 }

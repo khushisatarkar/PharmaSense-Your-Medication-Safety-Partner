@@ -11,7 +11,6 @@ include "db.php";
   <title>Drug Compatibility | Pharmasense</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header class="sub-header">

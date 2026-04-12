@@ -52,9 +52,9 @@
   "rantac": ["ranitidine"],
 
   "metrogyl": ["metronidazole"],
-  "flagyl": ["metronidazole"],
+  "flagyl": ["metronidazole", "tinidazole"],
 
-  "zerodol": ["aceclofenac"],
+  "zerodol": ["aceclofenac", "paracetamol"],
   "voveran": ["diclofenac"],
 
   "thyronorm": ["levothyroxine"],
