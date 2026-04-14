@@ -1,0 +1,222 @@
+{
+  "paracetamol": {
+    "child": { "max_dosage": 500, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 1000, "unit": "mg", "safe": true }
+  },
+  "ibuprofen": {
+    "child": { "max_dosage": 200, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 400, "unit": "mg", "safe": true }
+  },
+  "aspirin": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 325, "unit": "mg", "safe": true }
+  },
+  "amoxicillin": {
+    "child": { "max_dosage": 250, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 500, "unit": "mg", "safe": true }
+  },
+  "clavulanic acid": {
+    "child": { "max_dosage": 125, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 250, "unit": "mg", "safe": true }
+  },
+  "azithromycin": {
+    "child": { "max_dosage": 250, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 500, "unit": "mg", "safe": true }
+  },
+  "cefixime": {
+    "child": { "max_dosage": 200, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 400, "unit": "mg", "safe": true }
+  },
+  "cefuroxime": {
+    "child": { "max_dosage": 250, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 500, "unit": "mg", "safe": true }
+  },
+  "ceftriaxone": {
+    "child": { "max_dosage": 500, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 1000, "unit": "mg", "safe": true }
+  },
+  "cetirizine": {
+    "child": { "max_dosage": 5, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 10, "unit": "mg", "safe": true }
+  },
+  "fexofenadine": {
+    "child": { "max_dosage": 30, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 120, "unit": "mg", "safe": true }
+  },
+  "diphenhydramine": {
+    "child": { "max_dosage": 25, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 50, "unit": "mg", "safe": true }
+  },
+  "chlorpheniramine": {
+    "child": { "max_dosage": 2, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 8, "unit": "mg", "safe": true }
+  },
+  "pheniramine": {
+    "child": { "max_dosage": 25, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 50, "unit": "mg", "safe": true }
+  },
+  "dextromethorphan": {
+    "child": { "max_dosage": 15, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 30, "unit": "mg", "safe": true }
+  },
+  "ambroxol": {
+    "child": { "max_dosage": 15, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 30, "unit": "mg", "safe": true }
+  },
+  "guaifenesin": {
+    "child": { "max_dosage": 100, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 400, "unit": "mg", "safe": true }
+  },
+  "codeine": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 60, "unit": "mg", "safe": false }
+  },
+  "promethazine": {
+    "child": { "max_dosage": 10, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 25, "unit": "mg", "safe": true }
+  },
+  "phenylephrine": {
+    "child": { "max_dosage": 5, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 10, "unit": "mg", "safe": true }
+  },
+  "caffeine": {
+    "child": { "max_dosage": 50, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 200, "unit": "mg", "safe": true }
+  },
+  "pantoprazole": {
+    "child": { "max_dosage": 20, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 40, "unit": "mg", "safe": true }
+  },
+  "omeprazole": {
+    "child": { "max_dosage": 20, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 40, "unit": "mg", "safe": true }
+  },
+  "metformin": {
+    "child": { "max_dosage": 500, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 2000, "unit": "mg", "safe": true }
+  },
+  "atorvastatin": {
+    "child": { "max_dosage": 10, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 80, "unit": "mg", "safe": true }
+  },
+  "amlodipine": {
+    "child": { "max_dosage": 2.5, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 10, "unit": "mg", "safe": true }
+  },
+  "atenolol": {
+    "child": { "max_dosage": 25, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 100, "unit": "mg", "safe": true }
+  },
+  "losartan": {
+    "child": { "max_dosage": 25, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 100, "unit": "mg", "safe": true }
+  },
+  "telmisartan": {
+    "child": { "max_dosage": 20, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 80, "unit": "mg", "safe": true }
+  },
+  "diclofenac": {
+    "child": { "max_dosage": 25, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 50, "unit": "mg", "safe": true }
+  },
+  "naproxen": {
+    "child": { "max_dosage": 250, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 500, "unit": "mg", "safe": true }
+  },
+  "sumatriptan": {
+    "child": { "max_dosage": 25, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 100, "unit": "mg", "safe": true }
+  },
+  "alprazolam": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 1, "unit": "mg", "safe": true }
+  },
+  "levothyroxine": {
+    "child": { "max_dosage": 50, "unit": "mcg", "safe": true },
+    "adult": { "max_dosage": 200, "unit": "mcg", "safe": true }
+  },
+  "mefenamic acid": {
+    "child": { "max_dosage": 250, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 500, "unit": "mg", "safe": true }
+  },
+  "drotaverine": {
+    "child": { "max_dosage": 40, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 80, "unit": "mg", "safe": true }
+  },
+  "dicycloverine": {
+    "child": { "max_dosage": 10, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 20, "unit": "mg", "safe": true }
+  },
+  "prednisone": {
+    "child": { "max_dosage": 10, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 60, "unit": "mg", "safe": true }
+  },
+  "metronidazole": {
+    "child": { "max_dosage": 200, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 400, "unit": "mg", "safe": true }
+  },
+  "tinidazole": {
+    "child": { "max_dosage": 300, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 600, "unit": "mg", "safe": true }
+  },
+  "aceclofenac": {
+    "child": { "max_dosage": 100, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 200, "unit": "mg", "safe": true }
+  },
+  "simethicone": {
+    "child": { "max_dosage": 40, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 125, "unit": "mg", "safe": true }
+  },
+  "aluminium hydroxide": {
+    "child": { "max_dosage": 500, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 1000, "unit": "mg", "safe": true }
+  },
+  "magnesium hydroxide": {
+    "child": { "max_dosage": 500, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 1000, "unit": "mg", "safe": true }
+  },
+  "warfarin": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 10, "unit": "mg", "safe": true }
+  },
+  "clopidogrel": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 75, "unit": "mg", "safe": true }
+  },
+  "methotrexate": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 25, "unit": "mg", "safe": false }
+  },
+  "glimepiride": {
+    "child": { "max_dosage": 1, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 4, "unit": "mg", "safe": true }
+  },
+  "sitagliptin": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 100, "unit": "mg", "safe": true }
+  },
+  "vitamin e": {
+    "child": { "max_dosage": 10, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 400, "unit": "mg", "safe": true }
+  },
+  "vitamin b complex": {
+    "child": { "max_dosage": 10, "unit": "mg", "safe": true },
+    "adult": { "max_dosage": 50, "unit": "mg", "safe": true }
+  },
+  "dydrogesterone": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 20, "unit": "mg", "safe": true }
+  },
+  "ethinyl estradiol": {
+    "child": { "max_dosage": 0.03, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 0.05, "unit": "mg", "safe": true }
+  },
+  "cyproterone acetate": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 50, "unit": "mg", "safe": true }
+  },
+  "norethisterone": {
+    "child": { "max_dosage": 0, "unit": "mg", "safe": false },
+    "adult": { "max_dosage": 10, "unit": "mg", "safe": true }
+  }
+}
